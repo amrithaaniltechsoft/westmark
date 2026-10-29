@@ -1,26 +1,122 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-brand-red: #ff0000;
+  --color-brand-charcoal: #333333;
+  --color-brand-paper: #faf9f7;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  color-scheme: light;
+  background: #ffffff;
+  color: #171717;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 140px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  min-height: 100vh;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: #ff0000;
+  color: #ffffff;
+}
+
+.nav-link {
+  color: #555555;
+  font-size: 14px;
+  transition: color 180ms ease;
+}
+
+.nav-link:hover {
+  color: #ff0000;
+}
+
+.section-eyebrow {
+  color: #ff0000;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+}
+
+.form-field {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid rgb(0 0 0 / 14%);
+  border-radius: 0.5rem;
+  background: #ffffff;
+  padding: 0 14px;
+  color: #171717;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.form-field::placeholder {
+  color: #666666;
+}
+
+.form-field:focus {
+  border-color: #ff0000;
+  box-shadow: 0 0 0 3px rgb(255 0 0 / 8%);
+}
+
+textarea.form-field {
+  line-height: 1.7;
+}
+
+.footer-link {
+  transition: color 180ms ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+}
+
+.hero-swiper {
+  width: 100%;
+}
+
+.hero-swiper .swiper-slide {
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
