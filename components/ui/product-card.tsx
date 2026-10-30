@@ -33,9 +33,9 @@ export function ProductCard({ product, className = "" }: ProductCardProps) {
         <span className="absolute left-3 top-3 rounded-md bg-white/95 px-3 py-1 text-[12px] font-medium text-[#2d2d2d] shadow-xs">
           {product.tag}
         </span>
-        <span className="absolute bottom-3 right-3 flex size-9 items-center justify-center rounded-lg bg-white text-[#171717] shadow-sm transition group-hover:bg-[#ff0000] group-hover:text-white">
+        {/* <span className="absolute bottom-3 right-3 flex size-9 items-center justify-center rounded-lg bg-white text-[#171717] shadow-sm transition group-hover:bg-[#ff0000] group-hover:text-white">
           <ArrowUpRight size={18} />
-        </span>
+        </span> */}
       </a>
 
       <div className="flex flex-1 flex-col p-3.5 sm:p-4">

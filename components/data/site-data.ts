@@ -46,42 +46,42 @@ export const CATEGORIES: Category[] = [
     name: "All products",
     count: "Featured selection",
     image:
-      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=85",
+      "/categories/All products.png",
   },
   {
     name: "Aluminium Products & Extrusions",
     short: "Aluminium products",
     count: "Extrusions & profiles",
     image:
-      "https://images.unsplash.com/photo-1535813547-99c456a41d4a?auto=format&fit=crop&w=600&q=85",
+      "/categories/Aluminium Products & Extrusions.png",
   },
   {
     name: "Metal Products",
     short: "Metal products",
     count: "Steel & alloys",
     image:
-      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=85",
+      "/categories/Metal Products.png",
   },
   {
     name: "Plastics (HDPE & Others)",
     short: "Plastics (HDPE)",
     count: "Industrial polymers",
     image:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=85",
+      "/categories/Plastics (HDPE & Others).png",
   },
   {
     name: "AAC Blocks",
     short: "AAC blocks",
     count: "Construction materials",
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=85",
+      "/categories/AAC Blocks.png",
   },
   {
     name: "Spices",
     short: "Spices",
     count: "Natural ingredients",
     image:
-      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=85",
+      "/categories/Spices.png",
   },
 ];
 
@@ -203,7 +203,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Versatile copolymer and homopolymer granules engineered for injection moulding, packaging and woven sacks.",
     image:
-      "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1000&q=85",
     tag: "Industrial plastics",
     number: "11",
   },
@@ -214,7 +214,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Steel-reinforced aerated concrete floor slabs, wall panels and load-bearing lintels for rapid construction.",
     image:
-      "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?auto=format&fit=crop&w=1000&q=85",
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1000&q=85",
     tag: "Prefab concrete",
     number: "12",
   },
@@ -307,48 +307,48 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const HERO_SLIDES: HeroSlide[] = [
   {
-    eyebrow: "ALUMINIUM PRODUCTS & EXTRUSIONS",
-    title: "Aluminium Profiles &\nExtruded Sections",
+    eyebrow: "OUR PRODUCT CATEGORIES",
+    title: "Aluminium Products &\nExtrusions",
     description:
-      "High-grade architectural, commercial and industrial aluminium extrusions engineered to precision.",
+      "Explore premium architectural, commercial and industrial aluminium profiles, extrusions, and sheets.",
     image:
-      "https://images.unsplash.com/photo-1535813547-99c456a41d4a?auto=format&fit=crop&w=2200&q=90",
+      "/home-hero/Aluminium Products & Extrusions.png",
     label: "Category: Aluminium Products & Extrusions",
   },
   {
-    eyebrow: "METAL PRODUCTS",
-    title: "Industrial Metal &\nSteel Products",
+    eyebrow: "OUR PRODUCT CATEGORIES",
+    title: "Metal Products &\nStructural Steel",
     description:
-      "Dependable metal and structural steel sourcing for industrial, fabrication and infrastructure requirements.",
+      "Dependable metal, structural steel, rebar, beams, and stainless steel pipe sourcing for industrial infrastructure.",
     image:
-      "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=2200&q=90",
+      "/home-hero/Metal Products & Structural Steel.png",
     label: "Category: Metal Products",
   },
   {
-    eyebrow: "PLASTICS (HDPE & OTHERS)",
-    title: "HDPE & Polymer\nRaw Materials",
+    eyebrow: "OUR PRODUCT CATEGORIES",
+    title: "Plastics (HDPE &\nOther Polymers)",
     description:
-      "High-density polyethylene and versatile polymer resins for manufacturing, blow moulding and packaging.",
+      "High-density polyethylene, blow moulding resins, PP, and versatile polymer materials for packaging and manufacturing.",
     image:
-      "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=2200&q=90",
+      "/home-hero/Plastics HDPE & Other Polymers.png",
     label: "Category: Plastics (HDPE & Others)",
   },
   {
-    eyebrow: "AAC BLOCKS",
-    title: "Autoclaved Aerated\nConcrete Blocks",
+    eyebrow: "OUR PRODUCT CATEGORIES",
+    title: "Autoclaved Aerated\nConcrete (AAC Blocks)",
     description:
-      "Lightweight, thermal-efficient AAC blocks for modern building, residential and commercial projects.",
+      "Eco-friendly, lightweight, and thermal-efficient AAC blocks, panels, and thin-bed mortar for construction projects.",
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2200&q=90",
+      "/home-hero/Autoclaved Aerated Concrete AAC Blocks.png",
     label: "Category: AAC Blocks",
   },
   {
-    eyebrow: "SPICES",
-    title: "Premium Export\nQuality Spices",
+    eyebrow: "OUR PRODUCT CATEGORIES",
+    title: "Premium Export\nSpices",
     description:
-      "Carefully sourced whole and ground aromatic spices for wholesale, food processing and global distribution.",
+      "Carefully sourced whole and ground aromatic spices including black pepper, cardamom, turmeric, and dried chillies.",
     image:
-      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=2200&q=90",
+      "/home-hero/Premium Export Spices.png",
     label: "Category: Spices",
   },
 ];

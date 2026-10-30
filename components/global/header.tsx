@@ -28,20 +28,6 @@ export function Header({
 }: HeaderProps) {
   return (
     <>
-      {/* Top announcement */}
-      {/* <div className="border-b border-black/[0.08] bg-[#f4f5f7] px-4 py-2 text-[#171717]">
-        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-2 text-[13px]">
-          <p className="font-medium text-[#404040]">
-            Your partner for global sourcing and export solutions.
-          </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 font-semibold text-[#ff0000] transition hover:text-[#d90000]"
-          >
-            Talk to our team <ArrowUpRight size={14} />
-          </a>
-        </div>
-      </div> */}
 
       {/* Main header */}
       <header className="sticky top-0 z-40 border-b border-black/[0.08] bg-white backdrop-blur-xl shadow-lg">
@@ -170,15 +156,15 @@ export function Header({
               aria-label="Product categories"
               className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto py-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              <span className="mr-2 flex shrink-0 items-center gap-1.5 text-[12px] font-semibold text-[#404040]">
-                <Layers3 size={15} /> Categories:
+              <span className="mr-2 flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#404040]">
+                <Layers3 size={14} /> Categories:
               </span>
-              {categories.map((category) => (
+              {categories.slice(1).map((category) => (
                 <button
                   key={category.name}
                   type="button"
                   onClick={() => onSelectCategory(category.name)}
-                  className="shrink-0 px-2.5 py-1 text-left text-[13px] font-medium text-[#2d2d2d] underline decoration-black/25 underline-offset-4 transition hover:text-[#ff0000] hover:decoration-[#ff0000]"
+                  className="shrink-0 px-2 py-0.5 text-left text-[11.5px] font-medium text-[#2d2d2d] transition hover:text-[#ff0000] hover:decoration-[#ff0000]"
                 >
                   {category.short || category.name}
                 </button>
@@ -188,7 +174,7 @@ export function Header({
             <a
               href="#products"
               onClick={() => onSelectCategory("All products")}
-              className="shrink-0 text-[12px] font-medium text-[#ff0000] underline decoration-[#ff0000]/40 underline-offset-4 transition hover:text-[#d90000] hover:decoration-[#d90000] sm:text-[13px]"
+              className="shrink-0 text-[11.5px] font-semibold text-[#ff0000] underline decoration-[#ff0000]/40 underline-offset-4 transition hover:text-[#d90000] hover:decoration-[#d90000]"
             >
               View all
             </a>

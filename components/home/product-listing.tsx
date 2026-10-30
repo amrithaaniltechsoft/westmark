@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronDown, Headphones, Search, SlidersHorizontal } from "lucide-react";
+import { ArrowRight, ChevronDown, Search, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ui/product-card";
 import type { Category, Product } from "@/components/data/site-data";
@@ -25,22 +25,18 @@ export function ProductListing({
       <div className="mx-auto max-w-[1440px]">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="section-eyebrow">PRODUCT DIRECTORY</p>
             <h2 className="mt-3 text-[32px] tracking-[-0.04em] sm:text-[42px]">
               Products for your business
             </h2>
-            <p className="mt-3 max-w-xl text-[15px] leading-7 text-[#3f3f3f]">
-              Browse selected products and send an enquiry for your specifications and quantities.
-            </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <label className="flex h-11 min-w-0 items-center gap-2 rounded-lg border border-black/15 bg-[#faf9f7] px-3 sm:min-w-[210px]">
-              <SlidersHorizontal size={16} className="shrink-0 text-[#404040]" />
+            <label className="flex h-9 w-auto items-center gap-1.5 rounded-lg border border-black/15 bg-[#faf9f7] px-2.5">
+              <SlidersHorizontal size={14} className="shrink-0 text-[#404040]" />
               <select
                 value={activeCategory}
                 onChange={(event) => onSelectCategory(event.target.value)}
                 aria-label="Filter products by category"
-                className="min-w-0 flex-1 bg-transparent text-[14px] font-medium text-[#171717] outline-none"
+                className="bg-transparent text-[13px] font-medium text-[#171717] outline-none"
               >
                 {categories.map((category) => (
                   <option key={category.name} value={category.name}>
@@ -50,7 +46,6 @@ export function ProductListing({
                   </option>
                 ))}
               </select>
-              <ChevronDown size={15} className="text-[#404040]" />
             </label>
             <span className="text-[13px] font-medium text-[#404040]">
               {filteredProducts.length} products
@@ -82,13 +77,18 @@ export function ProductListing({
           </div>
         )}
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-5 rounded-2xl bg-[#f4f5f7] p-6 sm:flex-row sm:items-center sm:p-8">
-          <div className="flex items-start gap-4">
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#ff0000] shadow-xs">
-              <Headphones size={23} />
+        <div className="mt-10 flex flex-col items-start justify-between gap-5 overflow-hidden rounded-2xl bg-[#f4f5f7] sm:flex-row sm:items-center pr-6 sm:pr-8">
+          <div className="flex h-full items-center gap-5">
+            <div className="relative h-28 w-28 shrink-0 overflow-hidden sm:h-32 sm:w-32">
+              <img
+                src="/product-cta/3D Clipboard Inspection Icon.png"
+                alt="Product enquiry"
+                loading="lazy"
+                className="size-full object-cover"
+              />
             </div>
-            <div>
-              <h3 className="text-[17px] font-bold text-[#171717]">Looking for something specific?</h3>
+            <div className="py-4">
+              <h3 className="text-xl font-bold text-[#171717]">Looking for something specific?</h3>
               <p className="mt-1 text-[14px] leading-6 text-[#3f3f3f]">
                 Share your requirements, quantity and destination with our team.
               </p>
@@ -96,7 +96,7 @@ export function ProductListing({
           </div>
           <a
             href="#contact"
-            className="inline-flex min-h-12 shrink-0 items-center gap-2 rounded-lg bg-[#333333] px-6 py-3 text-[14px] font-medium text-white transition hover:bg-[#ff0000]"
+            className="my-4 ml-6 inline-flex min-h-12 shrink-0 items-center gap-2 rounded-lg bg-[#333333] px-6 py-3 text-[14px] font-medium text-white transition hover:bg-[#ff0000] sm:my-0 sm:ml-0"
           >
             Submit your requirements <ArrowRight size={16} />
           </a>

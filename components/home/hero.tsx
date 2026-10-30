@@ -32,7 +32,7 @@ export function Hero({ slides }: HeroProps) {
           className="hero-swiper h-[290px] min-h-[280px] rounded-2xl shadow-md sm:h-[320px] lg:h-[350px]"
         >
           {slides.map((slide, index) => (
-            <SwiperSlide key={slide.eyebrow} className="overflow-hidden rounded-2xl">
+            <SwiperSlide key={`${slide.title}-${index}`} className="overflow-hidden rounded-2xl">
               <div className="relative h-full min-h-[280px] overflow-hidden rounded-2xl bg-[#333333]">
                 <img
                   src={slide.image}
@@ -40,8 +40,8 @@ export function Hero({ slides }: HeroProps) {
                   fetchPriority={index === 0 ? "high" : "auto"}
                   className="absolute inset-0 size-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#171717]/90 via-[#171717]/65 to-[#171717]/10" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#171717]/90 via-[#171717]/45 to-transparent" />
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" /> */}
 
                 <div className="relative flex h-full min-h-[280px] flex-col justify-center px-6 py-5 text-white sm:px-10 lg:px-14">
                   <h1 className="max-w-[700px] whitespace-pre-line text-[26px] leading-[1.12] tracking-[-0.035em] sm:text-[34px] lg:text-[40px]">

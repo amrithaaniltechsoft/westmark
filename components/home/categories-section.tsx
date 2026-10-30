@@ -16,13 +16,9 @@ export function CategoriesSection({
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-9 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="section-eyebrow">DISCOVER OUR RANGE</p>
             <h2 className="mt-3 text-[32px] tracking-[-0.04em] sm:text-[42px]">
               Explore product categories
             </h2>
-            <p className="mt-3 max-w-xl text-[15px] leading-7 text-[#3f3f3f]">
-              Find the materials and products your business needs, all in one place.
-            </p>
           </div>
           <a
             href="#products"
