@@ -22,7 +22,7 @@ export function CategoriesSection({
           </div>
           <a
             href="#products"
-            className="group inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[14px] font-medium text-[#171717] shadow-sm transition hover:text-[#ff0000]"
+            className="group inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[14px] font-medium text-[#171717] transition hover:text-[#ff0000]"
           >
             View all products
             <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />

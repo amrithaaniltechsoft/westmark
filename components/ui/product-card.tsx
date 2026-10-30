@@ -31,15 +31,11 @@ export function ProductCard({ product, className = "" }: ProductCardProps) {
           className="size-full object-cover transition duration-500 group-hover:scale-[1.04]"
         />
         <span className="absolute left-3 top-3 rounded-md bg-white/95 px-3 py-1 text-[12px] font-medium text-[#2d2d2d] shadow-xs">
-          {product.tag}
+          {product.category}
         </span>
-        {/* <span className="absolute bottom-3 right-3 flex size-9 items-center justify-center rounded-lg bg-white text-[#171717] shadow-sm transition group-hover:bg-[#ff0000] group-hover:text-white">
-          <ArrowUpRight size={18} />
-        </span> */}
       </a>
 
       <div className="flex flex-1 flex-col p-3.5 sm:p-4">
-        <p className="text-[11px] font-semibold tracking-wide text-[#ff0000]">{product.category}</p>
         <h3 className="mt-1 text-[15px] font-bold leading-snug tracking-[-0.02em] text-[#171717] line-clamp-2">
           {product.name}
         </h3>

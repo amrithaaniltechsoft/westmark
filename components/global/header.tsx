@@ -77,10 +77,7 @@ export function Header({
                 About us
               </a>
               <a href="#services" className="nav-link font-medium text-[#2b2b2b] hover:text-[#ff0000]">
-                Services
-              </a>
-              <a href="#products" className="nav-link font-medium text-[#2b2b2b] hover:text-[#ff0000]">
-                Products
+                Products & Services
               </a>
               <a href="#contact" className="nav-link font-medium text-[#2b2b2b] hover:text-[#ff0000]">
                 Contact
@@ -131,8 +128,7 @@ export function Header({
             <nav className="grid gap-1 border-t border-black/10 py-3 lg:hidden">
               {[
                 ["About us", "#about"],
-                ["Products", "#products"],
-                ["Services", "#services"],
+                ["Products & Services", "#products"],
                 ["Testimonials", "#testimonials"],
                 ["Contact", "#contact"],
               ].map(([label, href]) => (

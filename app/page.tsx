@@ -14,6 +14,7 @@ import { AboutSection } from "@/components/home/about-section";
 import { CategoriesSection } from "@/components/home/categories-section";
 import { ContactSection } from "@/components/home/contact-section";
 import { Hero } from "@/components/home/hero";
+import { CategoryShowcase } from "@/components/home/category-showcase";
 import { ProductListing } from "@/components/home/product-listing";
 import { ServicesSection } from "@/components/home/services-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
@@ -59,7 +60,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen overflow-hidden bg-white text-[#171717]">
+    <main className="min-h-screen overflow-x-clip bg-white text-[#171717]">
       <Header
         categories={CATEGORIES}
         activeCategory={activeCategory}
@@ -81,6 +82,12 @@ export default function HomePage() {
         onSelectCategory={selectCategory}
       />
 
+      <CategoryShowcase
+        categories={CATEGORIES}
+        products={PRODUCTS}
+        onSelectCategory={selectCategory}
+      />
+
       <ProductListing
         categories={CATEGORIES}
         activeCategory={activeCategory}
@@ -93,8 +100,6 @@ export default function HomePage() {
       />
 
       <AboutSection />
-
-      <ServicesSection services={SERVICES} />
 
       <TestimonialsSection testimonials={TESTIMONIALS} />
 

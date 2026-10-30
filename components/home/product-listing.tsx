@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, ChevronDown, Search, SlidersHorizontal } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Search, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ui/product-card";
 import type { Category, Product } from "@/components/data/site-data";
@@ -20,13 +21,17 @@ export function ProductListing({
   onSelectCategory,
   onClearFilters,
 }: ProductListingProps) {
+  // Always limit to 3 rows (3 rows x 5 columns on desktop = 15 items)
+  const INITIAL_LIMIT = 15;
+  const displayedProducts = filteredProducts.slice(0, INITIAL_LIMIT);
+
   return (
     <section id="products" className="scroll-mt-36 bg-white px-4 pb-16 pt-8 sm:px-6 lg:px-10 lg:pb-24 lg:pt-10">
       <div className="mx-auto max-w-[1440px]">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <h2 className="mt-3 text-[32px] tracking-[-0.04em] sm:text-[42px]">
-              Products for your business
+              Featured Products & Services
             </h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -47,18 +52,27 @@ export function ProductListing({
                 ))}
               </select>
             </label>
-            <span className="text-[13px] font-medium text-[#404040]">
-              {filteredProducts.length} products
-            </span>
           </div>
         </div>
 
         {filteredProducts.length > 0 ? (
-          <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          <>
+            <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+              {displayedProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            <div className="mt-9 flex justify-center">
+              <Link
+                href="/products"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-black/15 bg-white px-7 py-3 text-[14px] font-semibold text-[#171717] shadow-xs transition hover:border-[#ff0000] hover:bg-[#ff0000] hover:text-white"
+              >
+                <span>View all products</span>
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </>
         ) : (
           <div className="mt-10 rounded-2xl border border-black/10 bg-[#f8f9fa] px-6 py-14 text-center">
             <Search className="mx-auto text-[#666666]" size={28} />
