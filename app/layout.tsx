@@ -2,6 +2,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { WhatsAppIsland } from "@/components/ui/whatsapp-island";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,6 +65,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-white font-sans font-normal text-[#171717] antialiased">
         {children}
+        <WhatsAppIsland />
       </body>
     </html>
   );

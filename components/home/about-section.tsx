@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export function AboutSection() {
   return (
@@ -16,39 +17,41 @@ export function AboutSection() {
           />
 
           {/* Left side white card containing about text with compact padding */}
-          <div className="relative z-10 w-full max-w-lg rounded-2xl bg-white/98 p-5 shadow-xl backdrop-blur-sm sm:p-7 lg:p-8">
-            <Eyebrow>ABOUT OUR COMPANY</Eyebrow>
+          <ScrollReveal variant="fade-right" delayMs={100} className="relative z-10 w-full max-w-lg">
+            <div className="rounded-2xl bg-white/98 p-5 shadow-xl backdrop-blur-sm sm:p-7 lg:p-8">
+              <Eyebrow>ABOUT OUR COMPANY</Eyebrow>
 
-            <h2 className="mt-2 text-[24px] font-bold leading-[1.15] tracking-[-0.035em] text-[#171717] sm:text-[30px] lg:text-[34px]">
-              Building connections.
-              <br />
-              Moving trade forward.
-            </h2>
+              <h2 className="mt-2 text-[24px] font-bold leading-[1.15] tracking-[-0.035em] text-[#171717] sm:text-[30px] lg:text-[34px]">
+                Building connections.
+                <br />
+                Moving trade forward.
+              </h2>
 
-            <p className="mt-3 text-[13px] leading-relaxed text-[#3f3f3f] sm:text-[14px]">
-              We work to connect product requirements with sourcing and export
-              opportunities across industrial materials, polymers, spices and
-              construction products. Our approach is built around clear
-              communication and long-term business relationships.
-            </p>
+              <p className="mt-3 text-[13px] leading-relaxed text-[#3f3f3f] sm:text-[14px]">
+                We work to connect product requirements with sourcing and export
+                opportunities across industrial materials, polymers, spices and
+                construction products. Our approach is built around clear
+                communication and long-term business relationships.
+              </p>
 
-            <div className="mt-5 flex flex-wrap items-center gap-2.5">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#ff0000] px-4 py-2.5 text-[13px] font-semibold text-white shadow-sm transition hover:bg-[#d60000]"
-              >
-                Learn more about us
-                <ArrowUpRight size={15} />
-              </a>
+              <div className="mt-5 flex flex-wrap items-center gap-2.5">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#ff0000] px-4 py-2.5 text-[13px] font-semibold text-white shadow-sm transition hover:bg-[#d60000]"
+                >
+                  Learn more about us
+                  <ArrowUpRight size={15} />
+                </a>
 
-              <a
-                href="#products"
-                className="inline-flex items-center gap-2 rounded-xl border border-black/15 bg-white px-4 py-2.5 text-[13px] font-semibold text-[#171717] shadow-xs transition hover:bg-[#f4f5f7]"
-              >
-                Explore catalog
-              </a>
+                <a
+                  href="#products"
+                  className="inline-flex items-center gap-2 rounded-xl border border-black/15 bg-white px-4 py-2.5 text-[13px] font-semibold text-[#171717] shadow-xs transition hover:bg-[#f4f5f7]"
+                >
+                  Explore catalog
+                </a>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

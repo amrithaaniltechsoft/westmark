@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Layers3, Menu, Search, X } from "lucide-react";
 import type { Category } from "@/components/data/site-data";
 
@@ -26,11 +27,39 @@ export function Header({
   onToggleMobileMenu,
   onCloseMobileMenu,
 }: HeaderProps) {
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+
+      // Always show when near the very top of the page
+      if (currentScrollY <= 80) {
+        setIsVisible(true);
+      } else if (currentScrollY < lastScrollY.current) {
+        // User is scrolling upwards -> reveal header
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY.current + 6 && !mobileMenuOpen) {
+        // User is scrolling downwards -> hide header
+        setIsVisible(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mobileMenuOpen]);
+
   return (
     <>
-
-      {/* Main header */}
-      <header className="sticky top-0 z-40 border-b border-black/[0.08] bg-white backdrop-blur-xl shadow-lg">
+      {/* Sticky Smart Header: Hides on scroll-down, reveals on scroll-up */}
+      <header
+        className={`sticky top-0 z-40 border-b border-black/[0.08] bg-white backdrop-blur-xl shadow-lg transition-transform duration-300 ease-in-out ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
         <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
           <div className="flex min-h-[82px] items-center gap-4 lg:gap-8">
             <a
@@ -48,71 +77,87 @@ export function Header({
             <form
               onSubmit={onSearchSubmit}
               role="search"
-              className="hidden min-w-0 flex-1 md:flex"
+              aria-label="Search all products"
+              className="relative hidden flex-1 md:block"
             >
-              <label className="flex h-[48px] w-full items-center rounded-xl border border-[#ff0000] bg-white transition focus-within:border-[#ff0000] focus-within:ring-2 focus-within:ring-[#ff0000]/15">
-                <Search
-                  className="ml-4 shrink-0 text-[#4a4a4a]"
-                  size={19}
-                />
+              <label className="relative flex h-11 items-center overflow-hidden rounded-lg border border-black/15 bg-[#faf9f7] transition focus-within:border-[#ff0000] focus-within:bg-white">
+                <Search size={18} className="ml-4 shrink-0 text-[#404040]" />
                 <input
                   type="search"
                   value={query}
                   onChange={(event) => onQueryChange(event.target.value)}
-                  placeholder="Search products, materials and categories..."
+                  placeholder="Search products, materials, polymers, spices..."
                   aria-label="Search products"
-                  className="h-full min-w-0 flex-1 bg-transparent px-3 text-[14px] font-medium text-[#171717] outline-none placeholder:text-[#666666]"
+                  className="size-full bg-transparent px-3 text-[14px] text-[#171717] outline-none placeholder:text-[#595959]"
                 />
                 <button
                   type="submit"
-                  className="m-1 flex h-[40px] shrink-0 items-center gap-2 rounded-lg bg-[#ff0000] px-5 text-[14px] font-medium text-white transition hover:bg-[#d90000]"
+                  aria-label="Submit product search"
+                  className="flex h-full items-center justify-center rounded-r-lg bg-[#ff0000] px-4 text-white transition hover:bg-[#d90000]"
                 >
-                  Search
+                  <ArrowRight size={17} />
                 </button>
               </label>
             </form>
 
-            <nav className="ml-auto hidden items-center gap-6 lg:flex">
-              <a href="#about" className="nav-link font-medium text-[#2b2b2b] hover:text-[#ff0000]">
-                About us
-              </a>
-              <a href="#services" className="nav-link font-medium text-[#2b2b2b] hover:text-[#ff0000]">
-                Products & Services
-              </a>
-              <a href="#contact" className="nav-link font-medium text-[#2b2b2b] hover:text-[#ff0000]">
-                Contact
-              </a>
+            <nav
+              aria-label="Main navigation"
+              className="hidden items-center gap-7 lg:flex"
+            >
+              {[
+                ["About us", "#about"],
+                ["Categories", "#categories"],
+                ["Products", "#products"],
+                ["Services", "#services"],
+                ["Testimonials", "#testimonials"],
+              ].map(([label, href]) => (
+                <a
+                  key={href}
+                  href={href}
+                  className="text-[14px] font-semibold text-[#171717] transition hover:text-[#ff0000]"
+                >
+                  {label}
+                </a>
+              ))}
             </nav>
 
-            <a
-              href="#contact"
-              className="hidden shrink-0 items-center gap-2 rounded-lg bg-[#ff0000] px-5 py-3 text-[14px] font-medium text-white transition hover:bg-[#d90000] sm:inline-flex"
-            >
-              Contact us <ArrowUpRight size={16} />
-            </a>
+            <div className="ml-auto flex items-center gap-2">
+              <a
+                href="#contact"
+                className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#ff0000] px-4 text-[13px] font-semibold text-white shadow-xs transition hover:bg-[#d90000]"
+              >
+                <span>Request quote</span>
+                <ArrowUpRight size={16} />
+              </a>
 
-            <button
-              type="button"
-              onClick={onToggleMobileMenu}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileMenuOpen}
-              className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg border border-black/15 bg-white text-[#171717] lg:hidden"
-            >
-              {mobileMenuOpen ? <X size={21} /> : <Menu size={21} />}
-            </button>
+              <button
+                type="button"
+                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={mobileMenuOpen}
+                onClick={onToggleMobileMenu}
+                className="flex size-11 items-center justify-center rounded-lg border border-black/10 bg-white text-[#171717] transition hover:bg-[#f4f5f7] lg:hidden"
+              >
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile search */}
-          <form onSubmit={onSearchSubmit} className="pb-4 md:hidden">
-            <label className="flex h-11 items-center rounded-lg border border-black/15 bg-white">
-              <Search className="ml-3 shrink-0 text-[#4a4a4a]" size={18} />
+          {/* Mobile search bar */}
+          <form
+            onSubmit={onSearchSubmit}
+            role="search"
+            aria-label="Search all products mobile"
+            className="pb-3 md:hidden"
+          >
+            <label className="relative flex h-10 items-center overflow-hidden rounded-lg border border-black/15 bg-[#faf9f7] focus-within:border-[#ff0000]">
+              <Search size={16} className="ml-3 shrink-0 text-[#404040]" />
               <input
                 type="search"
                 value={query}
                 onChange={(event) => onQueryChange(event.target.value)}
-                placeholder="Search products and categories..."
+                placeholder="Search products..."
                 aria-label="Search products"
-                className="h-full min-w-0 flex-1 bg-transparent px-3 text-[14px] font-medium text-[#171717] outline-none placeholder:text-[#666666]"
+                className="size-full bg-transparent px-3 text-[13px] text-[#171717] outline-none"
               />
               <button
                 aria-label="Submit search"
@@ -128,7 +173,9 @@ export function Header({
             <nav className="grid gap-1 border-t border-black/10 py-3 lg:hidden">
               {[
                 ["About us", "#about"],
-                ["Products & Services", "#products"],
+                ["Categories", "#categories"],
+                ["Products", "#products"],
+                ["Services", "#services"],
                 ["Testimonials", "#testimonials"],
                 ["Contact", "#contact"],
               ].map(([label, href]) => (
@@ -180,4 +227,3 @@ export function Header({
     </>
   );
 }
-

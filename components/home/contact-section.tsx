@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import { EMAIL_ADDRESS, PHONE_NUMBER } from "@/components/data/site-data";
 import type { Category } from "@/components/data/site-data";
 
@@ -26,7 +27,7 @@ export function ContactSection({ categories }: ContactSectionProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/45 to-transparent" />
 
           {/* Content */}
-          <div className="relative z-10 max-w-2xl">
+          <ScrollReveal variant="fade-up" className="relative z-10 max-w-2xl">
             <Eyebrow
               textClassName="text-white/90"
               slashClassName="text-[#ff0000]"
@@ -61,7 +62,7 @@ export function ContactSection({ categories }: ContactSectionProps) {
                 <span>{EMAIL_ADDRESS}</span>
               </a>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

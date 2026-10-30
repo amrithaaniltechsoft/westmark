@@ -7,6 +7,7 @@ import type { Swiper as SwiperInstance } from "swiper";
 import "swiper/css";
 import type { Category, Product } from "@/components/data/site-data";
 import { ProductCard } from "@/components/ui/product-card";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export interface CategoryShowcaseProps {
   categories: Category[];
@@ -116,18 +117,19 @@ export function CategoryShowcase({
   return (
     <section className="px-4 pb-6 pt-2 sm:px-6 lg:px-10 lg:pb-8">
       <div className="mx-auto max-w-[1440px] space-y-6">
-        {showcaseCategories.map((category) => {
+        {showcaseCategories.map((category, index) => {
           const categoryProducts = products.filter(
             (p) => p.category === category.name
           );
 
           return (
-            <CategoryRow
-              key={category.name}
-              category={category}
-              categoryProducts={categoryProducts}
-              onSelectCategory={onSelectCategory}
-            />
+            <ScrollReveal key={category.name} variant="fade-up" delayMs={index * 50}>
+              <CategoryRow
+                category={category}
+                categoryProducts={categoryProducts}
+                onSelectCategory={onSelectCategory}
+              />
+            </ScrollReveal>
           );
         })}
       </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Search, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ui/product-card";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import type { Category, Product } from "@/components/data/site-data";
 
 export interface ProductListingProps {
@@ -29,11 +30,11 @@ export function ProductListing({
     <section id="products" className="scroll-mt-36 bg-white px-4 pb-16 pt-8 sm:px-6 lg:px-10 lg:pb-24 lg:pt-10">
       <div className="mx-auto max-w-[1440px]">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
+          <ScrollReveal variant="fade-up">
             <h2 className="mt-3 text-[32px] tracking-[-0.04em] sm:text-[42px]">
               Featured Products & Services
             </h2>
-          </div>
+          </ScrollReveal>
           <div className="flex flex-wrap items-center gap-3">
             <label className="flex h-9 w-auto items-center gap-1.5 rounded-lg border border-black/15 bg-[#faf9f7] px-2.5">
               <SlidersHorizontal size={14} className="shrink-0 text-[#404040]" />
@@ -58,8 +59,10 @@ export function ProductListing({
         {filteredProducts.length > 0 ? (
           <>
             <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
-              {displayedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              {displayedProducts.map((product, index) => (
+                <ScrollReveal key={product.id} variant="fade-up" delayMs={(index % 5) * 50}>
+                  <ProductCard product={product} />
+                </ScrollReveal>
               ))}
             </div>
 
@@ -91,7 +94,8 @@ export function ProductListing({
           </div>
         )}
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-5 overflow-hidden rounded-2xl bg-[#f4f5f7] sm:flex-row sm:items-center pr-6 sm:pr-8">
+        <ScrollReveal variant="fade-up" delayMs={100} className="mt-10">
+          <div className="flex flex-col items-start justify-between gap-5 overflow-hidden rounded-2xl bg-[#f4f5f7] sm:flex-row sm:items-center pr-6 sm:pr-8">
           <div className="flex h-full items-center gap-5">
             <div className="relative h-28 w-28 shrink-0 overflow-hidden sm:h-32 sm:w-32">
               <img
@@ -114,7 +118,8 @@ export function ProductListing({
           >
             Submit your requirements <ArrowRight size={16} />
           </a>
-        </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

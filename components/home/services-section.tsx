@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import type { Service } from "@/components/data/site-data";
 
 export interface ServicesSectionProps {
@@ -11,7 +12,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
     <section id="services" className="scroll-mt-36 bg-white px-4 py-16 sm:px-6 lg:px-10 lg:py-24">
       <div className="mx-auto max-w-[1440px]">
         <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <div>
+          <ScrollReveal variant="fade-right">
             <Eyebrow>HOW WE HELP</Eyebrow>
             <h2 className="mt-3 max-w-lg text-[34px] font-bold leading-[1.12] tracking-[-0.04em] text-[#171717] sm:text-[44px]">
               Practical support for every stage of trade.
@@ -26,12 +27,14 @@ export function ServicesSection({ services }: ServicesSectionProps) {
             >
               Discuss your requirements <ArrowRight size={16} />
             </a>
-          </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 overflow-hidden rounded-2xl border border-black/[0.08] shadow-xs sm:grid-cols-2">
-            {services.map((service) => (
-              <article
+            {services.map((service, index) => (
+              <ScrollReveal
                 key={service.number}
+                variant="fade-up"
+                delayMs={index * 60}
                 className="border-b border-r border-black/[0.08] p-6 transition hover:bg-[#faf9f7] sm:p-7 lg:p-8"
               >
                 <div className="flex items-center justify-between">
@@ -46,7 +49,7 @@ export function ServicesSection({ services }: ServicesSectionProps) {
                 <p className="mt-3 text-[14px] leading-6 text-[#404040]">
                   {service.description}
                 </p>
-              </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>

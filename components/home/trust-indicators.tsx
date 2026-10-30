@@ -1,3 +1,5 @@
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+
 const trustIndicators = [
   {
     image: "/trust-section/Verified suppliers.png",
@@ -30,8 +32,10 @@ export function TrustIndicators() {
     <section className="px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {trustIndicators.map((item, index) => (
-          <div
+          <ScrollReveal
             key={item.title}
+            variant="fade-up"
+            delayMs={index * 80}
             className={`flex items-center gap-4 py-4 sm:px-6 lg:px-7 ${
               index !== 0 ? "border-t border-black/[0.08] sm:border-t-0" : ""
             } ${index !== 0 ? "sm:border-l sm:border-black/[0.08]" : ""}`}
@@ -50,10 +54,9 @@ export function TrustIndicators() {
                 {item.description}
               </p>
             </div>
-          </div>
+          </ScrollReveal>
         ))}
       </div>
     </section>
   );
 }
-
