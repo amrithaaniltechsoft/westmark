@@ -55,8 +55,7 @@ export function Footer({ categories, onSelectCategory }: FooterProps) {
             <div className="mt-4 flex flex-col items-start gap-3 text-[14px] font-medium text-white/70">
               <a href="#about" className="transition hover:text-[#ff0000]">About us</a>
               <a href="#categories" className="transition hover:text-[#ff0000]">Categories</a>
-              <a href="#products" className="transition hover:text-[#ff0000]">Products</a>
-              <a href="#services" className="transition hover:text-[#ff0000]">Services</a>
+              <a href="#products" className="transition hover:text-[#ff0000]">Products & Services</a>
             </div>
           </ScrollReveal>
 

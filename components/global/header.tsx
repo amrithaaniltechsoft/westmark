@@ -56,9 +56,8 @@ export function Header({
     <>
       {/* Sticky Smart Header: Hides on scroll-down, reveals on scroll-up */}
       <header
-        className={`sticky top-0 z-40 border-b border-black/[0.08] bg-white backdrop-blur-xl shadow-lg transition-transform duration-300 ease-in-out ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className={`sticky top-0 z-40 border-b border-black/[0.08] bg-white backdrop-blur-xl shadow-lg transition-transform duration-300 ease-in-out ${isVisible ? "translate-y-0" : "-translate-y-full"
+          }`}
       >
         <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
           <div className="flex min-h-[82px] items-center gap-4 lg:gap-8">
@@ -107,14 +106,14 @@ export function Header({
               {[
                 ["About us", "#about"],
                 ["Categories", "#categories"],
-                ["Products", "#products"],
-                ["Services", "#services"],
+                ["Products & Services", "#products"],
+
                 ["Testimonials", "#testimonials"],
               ].map(([label, href]) => (
                 <a
                   key={href}
                   href={href}
-                  className="text-[14px] font-semibold text-[#171717] transition hover:text-[#ff0000]"
+                  className="text-[14px] font-medium text-[#171717] transition hover:text-[#ff0000]"
                 >
                   {label}
                 </a>
@@ -174,8 +173,8 @@ export function Header({
               {[
                 ["About us", "#about"],
                 ["Categories", "#categories"],
-                ["Products", "#products"],
-                ["Services", "#services"],
+                ["Products & Services", "#products"],
+
                 ["Testimonials", "#testimonials"],
                 ["Contact", "#contact"],
               ].map(([label, href]) => (
