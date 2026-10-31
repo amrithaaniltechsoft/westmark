@@ -96,11 +96,7 @@ export function EnquiryForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (captchaInput.trim().toUpperCase() !== currentCaptcha) {
-      setCaptchaError("Incorrect security verification code. Please try again.");
-      return;
-    }
-
+    // Captcha hidden for now
     setCaptchaError("");
     onSubmit({
       quantity,
@@ -289,6 +285,8 @@ export function EnquiryForm({
           className="mt-2 w-full rounded-xl border border-black/15 bg-white p-3.5 text-[14px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10"
         />
       </div>
+
+      {/* Security Verification (Captcha hidden for now) */}
 
       {/* Submit Button */}
       <div className="pt-2">

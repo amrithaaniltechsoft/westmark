@@ -6,7 +6,7 @@ import en from "react-phone-number-input/locale/en.json";
 
 import type { Product } from "@/components/data/site-data";
 import { EnquiryForm, type EnquiryFormData } from "@/components/products/enquiry/enquiry-form";
-import { EnquirySuccessView } from "@/components/products/enquiry/enquiry-success-view";
+import { EnquirySuccessModal } from "@/components/products/enquiry/enquiry-success-modal";
 import type { CountryItem } from "@/components/products/enquiry/destination-country-selector";
 
 export interface EnquiryFormSectionProps {
@@ -64,17 +64,19 @@ export function EnquiryFormSection({ product }: EnquiryFormSectionProps) {
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submittedData, setSubmittedData] = useState<EnquiryFormData | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleFormSubmit = (data: EnquiryFormData) => {
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmittedData(data);
-    }, 800);
+      setIsModalOpen(true);
+    }, 700);
   };
 
-  const handleReset = () => {
-    setSubmittedData(null);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -83,26 +85,31 @@ export function EnquiryFormSection({ product }: EnquiryFormSectionProps) {
         <h1 className="text-[24px] font-bold tracking-tight text-[#171717] sm:text-[28px]">
           Request Quotation & Spec Sheet
         </h1>
+        <p className="mt-1 text-[13.5px] text-[#666]">
+          Fill in your shipment requirements below to receive a formal commercial proforma offer.
+        </p>
       </div>
 
-      {submittedData ? (
-        <EnquirySuccessView
+      {/* The Enquiry Form is always accessible */}
+      <EnquiryForm
+        priorityCountries={priorityCountries}
+        allCountries={allCountries}
+        isSubmitting={isSubmitting}
+        onSubmit={handleFormSubmit}
+      />
+
+      {/* Minimal Success Modal overlay with animated checkmark */}
+      {submittedData && (
+        <EnquirySuccessModal
+          isOpen={isModalOpen}
           fullName={submittedData.fullName}
           productName={product.name}
           quantity={submittedData.quantity}
           shippingUnit={submittedData.shippingUnit}
           workEmail={submittedData.workEmail}
-          onReset={handleReset}
-        />
-      ) : (
-        <EnquiryForm
-          priorityCountries={priorityCountries}
-          allCountries={allCountries}
-          isSubmitting={isSubmitting}
-          onSubmit={handleFormSubmit}
+          onClose={handleCloseModal}
         />
       )}
     </div>
   );
 }
-
