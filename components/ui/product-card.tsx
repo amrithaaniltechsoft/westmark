@@ -16,46 +16,52 @@ export function ProductCard({ product, className = "" }: ProductCardProps) {
 
   return (
     <article
-      className={`group flex flex-col overflow-hidden rounded-xl border border-black/[0.08] bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] ${className}`}
+      className={`group flex h-full flex-col overflow-hidden rounded-xl border border-black/[0.08] bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)] ${className}`}
     >
+      {/* Image container with locked aspect ratio */}
       <Link
         href={productHref}
         aria-label={`View full specifications for ${product.name}`}
-        className="relative block aspect-[4/3] overflow-hidden bg-[#f3f1ee]"
+        className="relative block aspect-[4/3] w-full shrink-0 overflow-hidden bg-[#f3f1ee]"
       >
         <Image
           src={product.image}
           alt={product.name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 20vw"
           className="object-cover transition duration-500 group-hover:scale-[1.04]"
         />
-        <span className="absolute left-3 top-3 rounded-md bg-white/95 px-3 py-1 text-[12px] font-medium text-[#2d2d2d] shadow-xs">
+        <span className="absolute left-2.5 top-2.5 sm:left-3 sm:top-3 rounded-md bg-white/95 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-[12px] font-medium text-[#2d2d2d] shadow-xs max-w-[calc(100%-20px)] truncate">
           {product.category}
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col p-3.5 sm:p-4">
-        <Link href={productHref}>
-          <h3 className="mt-1 text-[15px] font-bold leading-snug tracking-[-0.02em] text-[#171717] line-clamp-2 transition hover:text-[#ff0000]">
+      {/* Content body */}
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
+        <Link href={productHref} className="block">
+          <h3 className="text-[13.5px] sm:text-[15px] font-bold leading-snug tracking-[-0.02em] text-[#171717] line-clamp-2 transition hover:text-[#ff0000]">
             {product.name}
           </h3>
         </Link>
-        <p className="mt-2 flex-1 text-[13px] leading-5 text-[#3f3f3f] line-clamp-3">
+        <p className="mt-1.5 flex-1 text-[12px] sm:text-[13px] leading-relaxed sm:leading-5 text-[#4a4a4a] line-clamp-2 sm:line-clamp-3">
           {product.description}
         </p>
-        <div className="mt-4 grid grid-cols-2 gap-1.5">
+
+        {/* Action buttons */}
+        <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-1.5 pt-1">
           <Link
             href={productHref}
-            className="inline-flex min-h-9 items-center justify-center gap-1 rounded-lg border border-black/15 px-2 text-[12px] font-medium text-[#171717] transition hover:border-[#171717] hover:bg-[#171717] hover:text-white"
+            className="inline-flex h-8 sm:h-9 items-center justify-center gap-1 rounded-lg border border-black/15 px-1.5 sm:px-2 text-[11px] sm:text-[12px] font-medium text-[#171717] transition hover:border-[#171717] hover:bg-[#171717] hover:text-white whitespace-nowrap"
           >
-            View details <ArrowUpRight size={13} />
+            <span>Details</span>
+            <ArrowUpRight size={12} className="shrink-0 sm:size-[13px]" />
           </Link>
           <Link
             href={enquiryHref}
-            className="inline-flex min-h-9 items-center justify-center gap-1 rounded-lg bg-[#ff0000] px-2 text-[12px] font-medium text-white transition hover:bg-[#d90000]"
+            className="inline-flex h-8 sm:h-9 items-center justify-center gap-1 rounded-lg bg-[#ff0000] px-1.5 sm:px-2 text-[11px] sm:text-[12px] font-medium text-white transition hover:bg-[#d90000] whitespace-nowrap"
           >
-            Enquire <ArrowRight size={13} />
+            <span>Enquire</span>
+            <ArrowRight size={12} className="shrink-0 sm:size-[13px]" />
           </Link>
         </div>
       </div>

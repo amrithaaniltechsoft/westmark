@@ -165,8 +165,9 @@ export function Header({
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
-        <div className="flex h-20 items-center gap-4 lg:gap-8">
+      <div className="mx-auto max-w-[1440px] px-3 sm:px-6 lg:px-10">
+        <div className="flex h-16 items-center justify-between gap-3 sm:h-20 sm:gap-4 lg:gap-8">
+          {/* Logo */}
           <Link
             href="/"
             className="flex shrink-0 items-center transition hover:opacity-95"
@@ -177,19 +178,19 @@ export function Header({
               width={160}
               height={48}
               priority
-              className="h-10 w-auto max-w-[160px] object-contain sm:h-12"
+              className="h-8.5 w-auto max-w-[130px] object-contain sm:h-12 sm:max-w-[160px]"
             />
           </Link>
 
-          {/* Desktop search bar with live dropdown */}
-          <div ref={desktopSearchRef} className="relative hidden flex-1 md:block">
+          {/* Desktop & Tablet Search Bar (shown from md up) */}
+          <div ref={desktopSearchRef} className="relative hidden flex-1 md:block max-w-xl">
             <form
               onSubmit={handleSearch}
               role="search"
               aria-label="Search all products"
             >
-              <label className="relative flex h-11 items-center overflow-hidden rounded-xl border border-black/15 bg-white transition focus-within:border-[#ff0000] focus-within:ring-2 focus-within:ring-[#ff0000]/10">
-                <Search size={18} className="ml-4 shrink-0 text-[#404040]" />
+              <label className="relative flex h-10 lg:h-11 items-center overflow-hidden rounded-xl border border-black/15 bg-white transition focus-within:border-[#ff0000] focus-within:ring-2 focus-within:ring-[#ff0000]/10">
+                <Search size={17} className="ml-3.5 shrink-0 text-[#404040]" />
                 <input
                   type="search"
                   value={query}
@@ -202,7 +203,7 @@ export function Header({
                   }}
                   placeholder="Search products, materials, polymers, spices..."
                   aria-label="Search products"
-                  className="size-full bg-transparent px-3 text-[14px] text-[#171717] outline-none placeholder:text-[#595959]"
+                  className="size-full bg-transparent px-3 text-[13.5px] lg:text-[14px] text-[#171717] outline-none placeholder:text-[#595959]"
                 />
                 {query.trim() && (
                   <button
@@ -217,9 +218,9 @@ export function Header({
                 <button
                   type="submit"
                   aria-label="Submit product search"
-                  className="flex h-full items-center justify-center rounded-r-xl bg-[#ff0000] px-4 text-white transition hover:bg-[#d90000] cursor-pointer"
+                  className="flex h-full items-center justify-center rounded-r-xl bg-[#ff0000] px-3.5 lg:px-4 text-white transition hover:bg-[#d90000] cursor-pointer"
                 >
-                  <ArrowRight size={17} />
+                  <ArrowRight size={16} />
                 </button>
               </label>
             </form>
@@ -234,9 +235,10 @@ export function Header({
             />
           </div>
 
+          {/* Desktop Navigation Links */}
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-7 lg:flex"
+            className="hidden items-center gap-5 xl:gap-7 lg:flex"
           >
             {[
               ["About us", "/about"],
@@ -247,20 +249,21 @@ export function Header({
               <Link
                 key={href}
                 href={href}
-                className="text-[14px] font-medium text-[#171717] transition hover:text-[#ff0000]"
+                className="text-[13.5px] xl:text-[14px] font-medium text-[#171717] transition hover:text-[#ff0000] whitespace-nowrap"
               >
                 {label}
               </Link>
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center gap-2">
+          {/* Right Action Buttons */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
             <Link
               href="/contact"
-              className="inline-flex h-11 items-center gap-2 rounded-lg bg-[#ff0000] px-4 text-[13px] font-semibold text-white shadow-xs transition hover:bg-[#d90000]"
+              className="inline-flex h-9 sm:h-11 items-center gap-1.5 sm:gap-2 rounded-lg bg-[#ff0000] px-3 sm:px-4 text-[12px] sm:text-[13px] font-semibold text-white shadow-xs transition hover:bg-[#d90000] whitespace-nowrap"
             >
               <span>Request quote</span>
-              <ArrowUpRight size={16} />
+              <ArrowUpRight size={15} />
             </Link>
 
             <button
@@ -268,15 +271,15 @@ export function Header({
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
               onClick={toggleMenu}
-              className="flex size-11 items-center justify-center rounded-lg border border-black/10 bg-white text-[#171717] transition hover:bg-[#f4f5f7] lg:hidden"
+              className="flex size-9 sm:size-11 items-center justify-center rounded-lg border border-black/10 bg-white text-[#171717] transition hover:bg-[#f4f5f7] lg:hidden cursor-pointer"
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile search bar with live dropdown */}
-        <div ref={mobileSearchRef} className="relative pb-3 md:hidden">
+        {/* Mobile & Small Screen Search Bar (visible on < md) */}
+        <div ref={mobileSearchRef} className="relative pb-2.5 pt-0.5 md:hidden">
           <form
             onSubmit={handleSearch}
             role="search"
@@ -298,12 +301,22 @@ export function Header({
                 aria-label="Search products"
                 className="size-full bg-transparent px-3 text-[13px] text-[#171717] outline-none"
               />
+              {query.trim() && (
+                <button
+                  type="button"
+                  onClick={handleClearQuery}
+                  aria-label="Clear mobile search input"
+                  className="mr-1.5 flex size-6 shrink-0 items-center justify-center rounded-full text-[#888] transition hover:bg-black/5 hover:text-[#171717] cursor-pointer"
+                >
+                  <X size={14} />
+                </button>
+              )}
               <button
                 aria-label="Submit search"
                 type="submit"
-                className="flex h-full items-center justify-center rounded-r-xl bg-[#ff0000] px-4 text-white cursor-pointer"
+                className="flex h-full items-center justify-center rounded-r-xl bg-[#ff0000] px-3.5 text-white cursor-pointer"
               >
-                <ArrowRight size={17} />
+                <ArrowRight size={16} />
               </button>
             </label>
           </form>
@@ -318,6 +331,7 @@ export function Header({
           />
         </div>
 
+        {/* Mobile Collapsible Navigation Menu */}
         {mobileMenuOpen && (
           <nav className="grid gap-1 border-t border-black/10 py-3 lg:hidden">
             {[
@@ -330,7 +344,7 @@ export function Header({
                 key={href}
                 href={href}
                 onClick={closeMenu}
-                className="px-3 py-3 text-[15px] transition hover:bg-white hover:text-[#ff0000]"
+                className="rounded-lg px-3 py-2.5 text-[14px] font-medium text-[#171717] transition hover:bg-black/5 hover:text-[#ff0000]"
               >
                 {label}
               </Link>
@@ -339,22 +353,22 @@ export function Header({
         )}
       </div>
 
-      {/* Category bar */}
-      <div className="border-t border-black/[0.06]">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-10">
+      {/* Category Bar with Smooth Horizontal Touch Scrolling */}
+      <div className="border-t border-black/[0.06] bg-[#faf9f7]">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-3 sm:px-6 lg:px-10">
           <nav
             aria-label="Product categories"
             className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto py-1.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            <span className="mr-2 flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#404040]">
-              <Layers3 size={14} /> Categories:
+            <span className="mr-2 flex shrink-0 items-center gap-1.5 text-[11px] sm:text-xs font-semibold text-[#404040]">
+              <Layers3 size={13} className="shrink-0" /> Categories:
             </span>
             {categories.slice(1).map((category) => (
               <button
                 key={category.name}
                 type="button"
                 onClick={() => handleCategoryClick(category.name)}
-                className="shrink-0 px-2 py-0.5 text-left text-[11.5px] font-medium text-[#2d2d2d] transition hover:text-[#ff0000] hover:decoration-[#ff0000] cursor-pointer"
+                className="shrink-0 whitespace-nowrap px-2 py-0.5 text-left text-[11px] sm:text-[11.5px] font-medium text-[#2d2d2d] transition hover:text-[#ff0000] hover:decoration-[#ff0000] cursor-pointer"
               >
                 {category.short || category.name}
               </button>
@@ -363,7 +377,7 @@ export function Header({
 
           <Link
             href="/products"
-            className="shrink-0 text-[11.5px] font-semibold text-[#ff0000] underline decoration-[#ff0000]/40 underline-offset-4 transition hover:text-[#d90000] hover:decoration-[#d90000]"
+            className="shrink-0 text-[11px] sm:text-[11.5px] font-semibold text-[#ff0000] underline decoration-[#ff0000]/40 underline-offset-4 transition hover:text-[#d90000] hover:decoration-[#d90000]"
           >
             View all
           </Link>

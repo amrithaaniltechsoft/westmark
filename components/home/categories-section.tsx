@@ -13,31 +13,34 @@ export function CategoriesSection({
   onSelectCategory,
 }: CategoriesSectionProps) {
   return (
-    <section id="categories" className="scroll-mt-36 px-4 pb-4 sm:px-6 lg:px-10 lg:pb-6">
+    <section id="categories" className="scroll-mt-36 px-3.5 pb-4 sm:px-6 lg:px-10 lg:pb-6">
       <div className="mx-auto max-w-[1440px]">
-        <div className="mb-9 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3 sm:mb-9 sm:gap-4">
           <ScrollReveal variant="fade-up">
-            <h2 className="mt-3 text-[26px] font-semibold leading-[1.2] tracking-[-0.03em] text-[#171717] sm:text-[32px]">
+            <h2 className="text-[20px] font-semibold leading-[1.2] tracking-[-0.03em] text-[#171717] sm:text-[26px] md:text-[32px]">
               Explore product categories
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="fade-left">
             <a
               href="#products"
-              className="group inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-[14px] font-medium text-[#171717] transition hover:text-[#ff0000]"
+              className="group inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-[13px] font-medium text-[#171717] transition hover:text-[#ff0000] sm:px-4 sm:py-2 sm:text-[14px]"
             >
-              View all products
-              <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" />
+              <span>View all products</span>
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1 sm:size-[17px]" />
             </a>
           </ScrollReveal>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-5">
+        {/* Mobile: Horizontal scrollable row with negative margins for edge-to-edge swipe
+            Desktop (sm+): Regular multi-column grid (3 on tablet, 5 on desktop) */}
+        <div className="-mx-3.5 flex gap-4 overflow-x-auto px-3.5 pb-2 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 lg:grid-cols-5 lg:gap-6">
           {categories.slice(1).map((category, index) => (
             <ScrollReveal
               key={category.name}
               variant="fade-up"
               delayMs={index * 60}
+              className="w-[124px] shrink-0 sm:w-auto sm:shrink"
             >
               <CategoryCard
                 category={category}

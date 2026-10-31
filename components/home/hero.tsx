@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Autoplay, A11y } from "swiper/modules";
@@ -20,7 +19,7 @@ export function Hero({ slides }: HeroProps) {
   const swiperRef = useRef<SwiperInstance | null>(null);
 
   return (
-    <section id="home" className="px-4 pt-5 sm:px-6 lg:px-10 lg:pt-7">
+    <section id="home" className="px-3 pt-3 sm:px-6 sm:pt-5 lg:px-10 lg:pt-7">
       <div className="relative mx-auto max-w-[1440px]">
         <Swiper
           modules={[Autoplay, A11y]}
@@ -31,11 +30,11 @@ export function Hero({ slides }: HeroProps) {
             swiperRef.current = swiper;
           }}
           onSlideChange={(swiper) => setSlideIndex(swiper.realIndex)}
-          className="hero-swiper h-[290px] min-h-[280px] rounded-2xl shadow-md sm:h-[320px] lg:h-[350px]"
+          className="hero-swiper min-h-[310px] rounded-2xl shadow-md sm:h-[330px] lg:h-[360px]"
         >
           {slides.map((slide, index) => (
             <SwiperSlide key={`${slide.title}-${index}`} className="overflow-hidden rounded-2xl">
-              <div className="relative h-full min-h-[280px] overflow-hidden rounded-2xl bg-[#333333]">
+              <div className="relative flex min-h-[310px] flex-col justify-center overflow-hidden rounded-2xl bg-[#333333] sm:h-full">
                 <Image
                   src={slide.image}
                   alt={slide.label}
@@ -44,19 +43,18 @@ export function Hero({ slides }: HeroProps) {
                   sizes="(max-width: 1440px) 100vw, 1440px"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#171717]/90 via-[#171717]/45 to-transparent" />
-                {/* <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" /> */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#171717]/95 via-[#171717]/65 to-transparent sm:via-[#171717]/45" />
 
-                <div className="relative flex h-full min-h-[280px] flex-col justify-center px-6 py-5 text-white sm:px-10 lg:px-14">
-                  <h1 className="max-w-[700px] whitespace-pre-line text-[26px] leading-[1.12] tracking-[-0.035em] sm:text-[34px] lg:text-[40px]">
+                <div className="relative z-10 flex h-full flex-col justify-center px-4.5 py-6 pb-16 text-white sm:px-10 sm:py-6 sm:pb-6 lg:px-14">
+                  <h1 className="max-w-[700px] whitespace-pre-line text-[21px] leading-[1.18] tracking-[-0.035em] sm:text-[30px] md:text-[34px] lg:text-[40px]">
                     {slide.title}
                   </h1>
 
-                  <p className="mt-2.5 max-w-[460px] text-[13px] leading-snug text-white/85 sm:text-[14px] sm:leading-relaxed">
+                  <p className="mt-2 max-w-[460px] text-[12.5px] leading-relaxed text-white/85 sm:mt-2.5 sm:text-[14px]">
                     {slide.description}
                   </p>
 
-                  <div className="mt-4 flex flex-wrap gap-2.5">
+                  <div className="mt-4 flex flex-wrap gap-2 sm:gap-2.5">
                     <Button
                       as="a"
                       href="#products"
@@ -83,12 +81,12 @@ export function Hero({ slides }: HeroProps) {
         </Swiper>
 
         {/* Slider controls */}
-        <div className="absolute bottom-5 right-5 z-10 flex items-center gap-2 sm:bottom-8 sm:right-8">
-          <span className="mr-3 text-[13px] tabular-nums text-white">
+        <div className="absolute bottom-3 right-3 z-10 flex items-center gap-1.5 sm:bottom-6 sm:right-6 sm:gap-2">
+          <span className="mr-2 text-[12px] tabular-nums text-white sm:mr-3 sm:text-[13px]">
             <span className="text-white">
               {String(slideIndex + 1).padStart(2, "0")}
             </span>
-            <span className="mx-2 text-white/50">/</span>
+            <span className="mx-1.5 text-white/50 sm:mx-2">/</span>
             {String(slides.length).padStart(2, "0")}
           </span>
           <Button
@@ -96,20 +94,21 @@ export function Hero({ slides }: HeroProps) {
             size="icon"
             aria-label="Previous slide"
             onClick={() => swiperRef.current?.slidePrev()}
+            className="size-8 sm:size-9"
           >
-            <ArrowLeft size={19} />
+            <ArrowLeft size={16} />
           </Button>
           <Button
             variant="dark"
             size="icon"
             aria-label="Next slide"
             onClick={() => swiperRef.current?.slideNext()}
+            className="size-8 sm:size-9"
           >
-            <ArrowRight size={19} />
+            <ArrowRight size={16} />
           </Button>
         </div>
       </div>
     </section>
   );
 }
-

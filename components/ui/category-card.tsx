@@ -17,19 +17,20 @@ export function CategoryCard({
 }: CategoryCardProps) {
   const innerContent = (
     <>
-      <div className="mx-auto size-[140px] overflow-hidden rounded-full bg-[#efeeeb] p-1.5 sm:size-[160px] sm:p-2">
+      {/* Circular thumbnail: scales responsively from 110px on extra small phones, 130px on mobile, 140px on tablet, to 160px on desktop */}
+      <div className="mx-auto size-[110px] min-[390px]:size-[126px] sm:size-[140px] lg:size-[160px] overflow-hidden rounded-full bg-[#efeeeb] p-1.5 sm:p-2 transition-transform duration-300 group-hover:scale-[1.03]">
         <div className="relative size-full overflow-hidden rounded-full">
           <Image
             src={category.image}
             alt={category.short || category.name}
             fill
-            sizes="160px"
+            sizes="(max-width: 640px) 130px, 160px"
             className="object-cover transition duration-500 group-hover:scale-105"
           />
         </div>
       </div>
-      <div className="mt-3 max-w-[180px] text-center">
-        <h3 className="text-[13px] font-semibold leading-snug text-[#171717] transition group-hover:text-[#ff0000] sm:text-[14px]">
+      <div className="mt-2.5 sm:mt-3 max-w-[180px] text-center px-1">
+        <h3 className="text-[12px] min-[390px]:text-[13px] font-semibold leading-snug text-[#171717] transition group-hover:text-[#ff0000] sm:text-[14px]">
           {category.name}
         </h3>
       </div>
@@ -40,7 +41,7 @@ export function CategoryCard({
     return (
       <Link
         href={href}
-        className={`group flex flex-col items-center text-center ${className}`}
+        className={`group flex w-full flex-col items-center text-center cursor-pointer ${className}`}
       >
         {innerContent}
       </Link>
@@ -51,7 +52,7 @@ export function CategoryCard({
     <button
       type="button"
       onClick={() => onSelectCategory?.(category.name)}
-      className={`group flex flex-col items-center text-center ${className}`}
+      className={`group flex w-full flex-col items-center text-center cursor-pointer ${className}`}
     >
       {innerContent}
     </button>

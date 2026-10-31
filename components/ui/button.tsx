@@ -51,12 +51,18 @@ const variantStyles: Record<ButtonVariant, string> = {
     "border border-white/40 bg-black/20 text-white backdrop-blur-sm hover:bg-white hover:text-[#333333] focus-visible:outline-white",
 };
 
+/**
+ * Mobile-first responsive sizing:
+ * - Keeps a strict minimum accessible touch target height (min-h-[38px] for sm, min-h-[42px] for md, min-h-[46px] for lg)
+ * - Minimum font size is text-[12.5px] scaling to text-[13.5px] - text-[15px]
+ * - Horizontal padding and gap adapt fluidly between mobile and sm/md breakpoints
+ */
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "min-h-9 px-3.5 py-1.5 text-[13px] gap-2",
-  md: "min-h-11 px-5 py-2.5 text-[14px] gap-2.5",
-  lg: "min-h-12 px-6 py-3 text-[14px] sm:text-[15px] gap-3",
-  icon: "size-11 p-0 shrink-0",
-  "icon-sm": "size-9 p-0 shrink-0",
+  sm: "min-h-[38px] px-3 py-1.5 text-[12.5px] sm:text-[13px] sm:px-3.5 gap-1.5 sm:gap-2",
+  md: "min-h-[42px] sm:min-h-11 px-4 py-2 sm:px-5 sm:py-2.5 text-[13px] sm:text-[14px] gap-2 sm:gap-2.5",
+  lg: "min-h-[46px] sm:min-h-12 px-5 py-2.5 sm:px-6 sm:py-3 text-[13.5px] sm:text-[15px] gap-2.5 sm:gap-3",
+  icon: "size-10 sm:size-11 p-0 shrink-0",
+  "icon-sm": "size-8.5 sm:size-9 p-0 shrink-0",
 };
 
 export const Button = React.forwardRef<
@@ -77,7 +83,7 @@ export const Button = React.forwardRef<
   } = props;
 
   const baseStyles =
-    "inline-flex items-center justify-center font-medium select-none cursor-pointer rounded-lg transition-all duration-200 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50";
+    "inline-flex items-center justify-center font-medium select-none cursor-pointer rounded-lg transition-all duration-200 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap";
 
   const resolvedClasses = [
     baseStyles,
