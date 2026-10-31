@@ -1,6 +1,6 @@
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { slugify } from "@/components/data/site-data";
+import { slugify } from "@/lib/slugify";
 
 export interface EnquirySuccessViewProps {
   fullName: string;

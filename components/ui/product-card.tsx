@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { Product } from "@/components/data/site-data";
-import { EMAIL_ADDRESS, slugify } from "@/components/data/site-data";
+import { slugify } from "@/lib/slugify";
 
 export interface ProductCardProps {
   product: Product;
@@ -12,10 +12,7 @@ export interface ProductCardProps {
 export function ProductCard({ product, className = "" }: ProductCardProps) {
   const productSlug = slugify(product.name);
   const productHref = `/products/${productSlug}`;
-
-  const mailtoEnquiry = `mailto:${EMAIL_ADDRESS}?subject=${encodeURIComponent(
-    `Product enquiry: ${product.name}`
-  )}`;
+  const enquiryHref = `/products/${productSlug}/enquiry`;
 
   return (
     <article
@@ -54,12 +51,12 @@ export function ProductCard({ product, className = "" }: ProductCardProps) {
           >
             View details <ArrowUpRight size={13} />
           </Link>
-          <a
-            href={mailtoEnquiry}
+          <Link
+            href={enquiryHref}
             className="inline-flex min-h-9 items-center justify-center gap-1 rounded-lg bg-[#ff0000] px-2 text-[12px] font-medium text-white transition hover:bg-[#d90000]"
           >
             Enquire <ArrowRight size={13} />
-          </a>
+          </Link>
         </div>
       </div>
     </article>

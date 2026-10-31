@@ -29,7 +29,7 @@ export function PageHero({
       />
 
       {/* Subtle overlay for image contrast */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* <div className="absolute inset-0 bg-black/40" /> */}
 
       {/* Inner Container aligning with site grid */}
       <div className="relative z-10 mx-auto flex h-full max-w-[1440px] items-center px-4 sm:px-6 lg:px-10">

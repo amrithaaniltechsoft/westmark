@@ -1,7 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 import type { Product } from "@/components/data/site-data";
-import { EMAIL_ADDRESS, PHONE_NUMBER, slugify } from "@/components/data/site-data";
+import { EMAIL_ADDRESS, PHONE_NUMBER } from "@/components/data/site-data";
+import { slugify } from "@/lib/slugify";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ProductBreadcrumb } from "@/components/products/detailed/product-breadcrumb";

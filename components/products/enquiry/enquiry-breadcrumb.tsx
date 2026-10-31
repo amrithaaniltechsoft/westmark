@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import type { Product } from "@/components/data/site-data";
-import { slugify } from "@/components/data/site-data";
+import { slugify } from "@/lib/slugify";
 
 export interface EnquiryBreadcrumbProps {
   product: Product;
