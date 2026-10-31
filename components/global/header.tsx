@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Layers3, Menu, Search, X } from "lucide-react";
-import type { Category } from "@/components/data/site-data";
-import { CATEGORIES } from "@/components/data/site-data";
+import type { Category, Product } from "@/components/data/site-data";
+import { CATEGORIES, PRODUCTS } from "@/components/data/site-data";
+import { SearchDropdown } from "@/components/global/search-dropdown";
 
 export interface HeaderProps {
   categories?: Category[];
@@ -33,15 +34,20 @@ export function Header({
 }: HeaderProps) {
   const router = useRouter();
 
-  // Internal state fallback for layout usage
+  // Search and dropdown state
   const [internalQuery, setInternalQuery] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [internalMobileMenuOpen, setInternalMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
 
+  const desktopSearchRef = useRef<HTMLDivElement>(null);
+  const mobileSearchRef = useRef<HTMLDivElement>(null);
+
   const query = propQuery !== undefined ? propQuery : internalQuery;
   const mobileMenuOpen = propMobileMenuOpen !== undefined ? propMobileMenuOpen : internalMobileMenuOpen;
 
+  // Header scroll auto-hide
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
@@ -61,19 +67,54 @@ export function Header({
     return () => window.removeEventListener("scroll", handleScroll);
   }, [mobileMenuOpen]);
 
+  // Close search dropdown on scroll or outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      const target = e.target as Node;
+      if (
+        (!desktopSearchRef.current || !desktopSearchRef.current.contains(target)) &&
+        (!mobileSearchRef.current || !mobileSearchRef.current.contains(target))
+      ) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    function handleWindowScroll() {
+      setIsDropdownOpen(false);
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleWindowScroll, { passive: true });
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleWindowScroll);
+    };
+  }, []);
+
+  function handleClearQuery() {
+    handleQueryChange("");
+    setIsDropdownOpen(false);
+  }
+
   function handleQueryChange(val: string) {
     if (onQueryChange) {
       onQueryChange(val);
     } else {
       setInternalQuery(val);
     }
+    if (val.trim().length > 0) {
+      setIsDropdownOpen(true);
+    } else {
+      setIsDropdownOpen(false);
+    }
   }
 
-  function handleSearch(event: React.FormEvent<HTMLFormElement>) {
-    if (onSearchSubmit) {
+  function handleSearch(event?: React.FormEvent<HTMLFormElement>) {
+    if (event) event.preventDefault();
+    setIsDropdownOpen(false);
+    if (onSearchSubmit && event) {
       onSearchSubmit(event);
     } else {
-      event.preventDefault();
       if (query.trim()) {
         router.push(`/products?search=${encodeURIComponent(query.trim())}`);
       } else {
@@ -106,17 +147,29 @@ export function Header({
     }
   }
 
+  // Filter top 6 matching products for live dropdown suggestion
+  const searchResults: Product[] = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return PRODUCTS.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+    ).slice(0, 6);
+  }, [query]);
+
   return (
     <header
-      className={`sticky top-0 z-40 border-b border-black/[0.08] bg-white backdrop-blur-xl shadow-md transition-transform duration-300 ease-in-out ${isVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+      className={`sticky top-0 z-40 w-full border-b border-black/[0.08] bg-[#faf9f7] transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
     >
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10">
-        <div className="flex min-h-[82px] items-center gap-4 lg:gap-8">
+        <div className="flex h-20 items-center gap-4 lg:gap-8">
           <Link
             href="/"
-            aria-label="Go to homepage"
-            className="flex shrink-0 items-center"
+            className="flex shrink-0 items-center transition hover:opacity-95"
           >
             <Image
               src="/logo/logo.svg"
@@ -128,31 +181,58 @@ export function Header({
             />
           </Link>
 
-          <form
-            onSubmit={handleSearch}
-            role="search"
-            aria-label="Search all products"
-            className="relative hidden flex-1 md:block"
-          >
-            <label className="relative flex h-11 items-center overflow-hidden rounded-lg border border-black/15 bg-[#faf9f7] transition focus-within:border-[#ff0000] focus-within:bg-white">
-              <Search size={18} className="ml-4 shrink-0 text-[#404040]" />
-              <input
-                type="search"
-                value={query}
-                onChange={(event) => handleQueryChange(event.target.value)}
-                placeholder="Search products, materials, polymers, spices..."
-                aria-label="Search products"
-                className="size-full bg-transparent px-3 text-[14px] text-[#171717] outline-none placeholder:text-[#595959]"
-              />
-              <button
-                type="submit"
-                aria-label="Submit product search"
-                className="flex h-full items-center justify-center rounded-r-lg bg-[#ff0000] px-4 text-white transition hover:bg-[#d90000]"
-              >
-                <ArrowRight size={17} />
-              </button>
-            </label>
-          </form>
+          {/* Desktop search bar with live dropdown */}
+          <div ref={desktopSearchRef} className="relative hidden flex-1 md:block">
+            <form
+              onSubmit={handleSearch}
+              role="search"
+              aria-label="Search all products"
+            >
+              <label className="relative flex h-11 items-center overflow-hidden rounded-xl border border-black/15 bg-white transition focus-within:border-[#ff0000] focus-within:ring-2 focus-within:ring-[#ff0000]/10">
+                <Search size={18} className="ml-4 shrink-0 text-[#404040]" />
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(event) => handleQueryChange(event.target.value)}
+                  onFocus={() => {
+                    if (query.trim()) setIsDropdownOpen(true);
+                  }}
+                  onClick={() => {
+                    if (query.trim()) setIsDropdownOpen(true);
+                  }}
+                  placeholder="Search products, materials, polymers, spices..."
+                  aria-label="Search products"
+                  className="size-full bg-transparent px-3 text-[14px] text-[#171717] outline-none placeholder:text-[#595959]"
+                />
+                {query.trim() && (
+                  <button
+                    type="button"
+                    onClick={handleClearQuery}
+                    aria-label="Clear search input"
+                    className="mr-2 flex size-6 shrink-0 items-center justify-center rounded-full text-[#888] transition hover:bg-black/5 hover:text-[#171717] cursor-pointer"
+                  >
+                    <X size={15} />
+                  </button>
+                )}
+                <button
+                  type="submit"
+                  aria-label="Submit product search"
+                  className="flex h-full items-center justify-center rounded-r-xl bg-[#ff0000] px-4 text-white transition hover:bg-[#d90000] cursor-pointer"
+                >
+                  <ArrowRight size={17} />
+                </button>
+              </label>
+            </form>
+
+            {/* Desktop Suggestions Dropdown */}
+            <SearchDropdown
+              isOpen={isDropdownOpen}
+              query={query}
+              results={searchResults}
+              onSelectProduct={() => setIsDropdownOpen(false)}
+              onViewAllResults={() => handleSearch()}
+            />
+          </div>
 
           <nav
             aria-label="Main navigation"
@@ -195,32 +275,48 @@ export function Header({
           </div>
         </div>
 
-        {/* Mobile search bar */}
-        <form
-          onSubmit={handleSearch}
-          role="search"
-          aria-label="Search all products mobile"
-          className="pb-3 md:hidden"
-        >
-          <label className="relative flex h-10 items-center overflow-hidden rounded-lg border border-black/15 bg-[#faf9f7] focus-within:border-[#ff0000]">
-            <Search size={16} className="ml-3 shrink-0 text-[#404040]" />
-            <input
-              type="search"
-              value={query}
-              onChange={(event) => handleQueryChange(event.target.value)}
-              placeholder="Search products..."
-              aria-label="Search products"
-              className="size-full bg-transparent px-3 text-[13px] text-[#171717] outline-none"
-            />
-            <button
-              aria-label="Submit search"
-              type="submit"
-              className="flex h-full items-center justify-center rounded-r-lg bg-[#ff0000] px-4 text-white"
-            >
-              <ArrowRight size={17} />
-            </button>
-          </label>
-        </form>
+        {/* Mobile search bar with live dropdown */}
+        <div ref={mobileSearchRef} className="relative pb-3 md:hidden">
+          <form
+            onSubmit={handleSearch}
+            role="search"
+            aria-label="Search all products mobile"
+          >
+            <label className="relative flex h-10 items-center overflow-hidden rounded-xl border border-black/15 bg-white focus-within:border-[#ff0000] focus-within:ring-2 focus-within:ring-[#ff0000]/10">
+              <Search size={16} className="ml-3 shrink-0 text-[#404040]" />
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => handleQueryChange(event.target.value)}
+                onFocus={() => {
+                  if (query.trim()) setIsDropdownOpen(true);
+                }}
+                onClick={() => {
+                  if (query.trim()) setIsDropdownOpen(true);
+                }}
+                placeholder="Search products..."
+                aria-label="Search products"
+                className="size-full bg-transparent px-3 text-[13px] text-[#171717] outline-none"
+              />
+              <button
+                aria-label="Submit search"
+                type="submit"
+                className="flex h-full items-center justify-center rounded-r-xl bg-[#ff0000] px-4 text-white cursor-pointer"
+              >
+                <ArrowRight size={17} />
+              </button>
+            </label>
+          </form>
+
+          {/* Mobile Suggestions Dropdown */}
+          <SearchDropdown
+            isOpen={isDropdownOpen}
+            query={query}
+            results={searchResults}
+            onSelectProduct={() => setIsDropdownOpen(false)}
+            onViewAllResults={() => handleSearch()}
+          />
+        </div>
 
         {mobileMenuOpen && (
           <nav className="grid gap-1 border-t border-black/10 py-3 lg:hidden">
@@ -258,7 +354,7 @@ export function Header({
                 key={category.name}
                 type="button"
                 onClick={() => handleCategoryClick(category.name)}
-                className="shrink-0 px-2 py-0.5 text-left text-[11.5px] font-medium text-[#2d2d2d] transition hover:text-[#ff0000] hover:decoration-[#ff0000]"
+                className="shrink-0 px-2 py-0.5 text-left text-[11.5px] font-medium text-[#2d2d2d] transition hover:text-[#ff0000] hover:decoration-[#ff0000] cursor-pointer"
               >
                 {category.short || category.name}
               </button>
