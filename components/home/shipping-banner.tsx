@@ -45,16 +45,16 @@ export function ShippingBanner() {
                 size="md"
                 rightIcon={<ArrowRight size={16} />}
               >
-                Request shipping quote
+                Request a quote
               </Button>
 
               <Button
                 as="a"
-                href="#products"
+                href="/abouts"
                 variant="tertiary"
                 size="md"
               >
-                View shippable products
+                About Us
               </Button>
             </div>
           </ScrollReveal>

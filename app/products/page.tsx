@@ -1,6 +1,6 @@
+import { Suspense } from "react";
 import { CATEGORIES, PRODUCTS } from "@/components/data/site-data";
-import { ProductsCategoryNav } from "@/components/products/listing/products-category-nav";
-import { CategoryProductGroup } from "@/components/products/listing/category-product-group";
+import { ProductsCatalogContainer } from "@/components/products/listing/products-catalog-container";
 
 export const metadata = {
   title: "All Products & Catalog | Layrock Global Trading LTD",
@@ -8,31 +8,26 @@ export const metadata = {
     "Explore our complete product catalog across aluminium extrusions, structural metals, polymers, Indian spices, and AAC building blocks.",
 };
 
-export default function ProductsPage() {
-  // Only real categories (excluding "All products")
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ category?: string }>;
+}) {
+  const resolvedParams = searchParams ? await searchParams : undefined;
+  const initialCategory = resolvedParams?.category;
+
+  // Filter out any virtual "All products" item to show only true categories
   const mainCategories = CATEGORIES.filter((c) => c.name !== "All products");
 
   return (
     <main className="min-h-screen overflow-x-clip bg-[#f4f5f7] text-[#171717]">
-      {/* Category Circle Cards Grid at the Top */}
-      <ProductsCategoryNav categories={mainCategories} />
-
-      {/* Categorized Products List - Full-width banners, no outer container padding */}
-      <div className="space-y-0">
-        {mainCategories.map((category) => {
-          const categoryProducts = PRODUCTS.filter(
-            (product) => product.category === category.name
-          );
-
-          return (
-            <CategoryProductGroup
-              key={category.name}
-              category={category}
-              products={categoryProducts}
-            />
-          );
-        })}
-      </div>
+      <Suspense fallback={<div className="min-h-screen bg-[#f4f5f7]" />}>
+        <ProductsCatalogContainer
+          categories={mainCategories}
+          products={PRODUCTS}
+          initialCategory={initialCategory}
+        />
+      </Suspense>
     </main>
   );
 }
