@@ -1,29 +1,30 @@
+import Image from "next/image";
+import Link from "next/link";
 import type { Category } from "@/components/data/site-data";
 
 export interface CategoryCardProps {
   category: Category;
+  href?: string;
   onSelectCategory?: (categoryName: string) => void;
   className?: string;
 }
 
 export function CategoryCard({
   category,
+  href,
   onSelectCategory,
   className = "",
 }: CategoryCardProps) {
-  return (
-    <button
-      type="button"
-      onClick={() => onSelectCategory?.(category.name)}
-      className={`group flex flex-col items-center text-center ${className}`}
-    >
-      <div className="mx-auto aspect-square w-full max-w-[150px] overflow-hidden rounded-full bg-[#efeeeb] p-1.5 sm:max-w-[160px] sm:p-2">
-        <div className="size-full overflow-hidden rounded-full">
-          <img
+  const innerContent = (
+    <>
+      <div className="mx-auto size-[140px] overflow-hidden rounded-full bg-[#efeeeb] p-1.5 sm:size-[160px] sm:p-2">
+        <div className="relative size-full overflow-hidden rounded-full">
+          <Image
             src={category.image}
             alt={category.short || category.name}
-            loading="lazy"
-            className="size-full object-cover transition duration-500 group-hover:scale-105"
+            fill
+            sizes="160px"
+            className="object-cover transition duration-500 group-hover:scale-105"
           />
         </div>
       </div>
@@ -32,7 +33,27 @@ export function CategoryCard({
           {category.name}
         </h3>
       </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={`group flex flex-col items-center text-center ${className}`}
+      >
+        {innerContent}
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelectCategory?.(category.name)}
+      className={`group flex flex-col items-center text-center ${className}`}
+    >
+      {innerContent}
     </button>
   );
 }
-

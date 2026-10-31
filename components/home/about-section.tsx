@@ -1,3 +1,5 @@
+import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
@@ -9,11 +11,12 @@ export function AboutSection() {
         {/* Full width boxed container with background image and reduced height */}
         <div className="relative min-h-[380px] overflow-hidden rounded-3xl bg-[#171717] p-4 sm:p-6 lg:min-h-[430px] lg:p-8 flex items-center">
           {/* Background image */}
-          <img
+          <Image
             src="/banner/b4.png"
             alt="International freight and global trade logistics"
-            loading="lazy"
-            className="absolute inset-0 size-full object-cover transition-transform duration-700 hover:scale-105"
+            fill
+            sizes="(max-width: 1440px) 100vw, 1440px"
+            className="object-cover transition-transform duration-700 hover:scale-105"
           />
 
           {/* Left side white card containing about text with compact padding */}
@@ -35,13 +38,13 @@ export function AboutSection() {
               </p>
 
               <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                <a
-                  href="#contact"
+                <Link
+                  href="/about"
                   className="inline-flex items-center gap-2 rounded-xl bg-[#ff0000] px-4 py-2.5 text-[13px] font-semibold text-white shadow-sm transition hover:bg-[#d60000]"
                 >
                   Learn more about us
                   <ArrowUpRight size={15} />
-                </a>
+                </Link>
 
                 <a
                   href="#products"

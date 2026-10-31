@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const trustIndicators = [
@@ -41,11 +42,12 @@ export function TrustIndicators() {
             } ${index !== 0 ? "sm:border-l sm:border-black/[0.08]" : ""}`}
           >
             <div className="relative size-16 shrink-0 overflow-hidden rounded-xl sm:size-20">
-              <img
+              <Image
                 src={item.image}
                 alt={item.title}
-                loading="lazy"
-                className="size-full object-cover"
+                fill
+                sizes="(max-width: 640px) 64px, 80px"
+                className="object-cover"
               />
             </div>
             <div className="flex flex-1 flex-col justify-center">

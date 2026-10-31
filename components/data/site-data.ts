@@ -16,6 +16,17 @@ export interface Product {
   number: string;
 }
 
+export function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+}
+
+export function getProductBySlug(slug: string): Product | undefined {
+  return PRODUCTS.find((p) => slugify(p.name) === slug);
+}
+
 export interface Service {
   number: string;
   icon: typeof Globe2;

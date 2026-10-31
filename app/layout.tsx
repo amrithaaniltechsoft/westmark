@@ -1,7 +1,8 @@
-
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/global/header";
+import { Footer } from "@/components/global/footer";
 import { WhatsAppIsland } from "@/components/ui/whatsapp-island";
 
 const geistSans = Geist({
@@ -27,13 +28,22 @@ export const metadata: Metadata = {
   keywords: [
     "export company",
     "international trade",
+    "UK trading company",
+    "Bristol export company",
+    "Keynsham trade house",
+    "UK commodity trading",
+    "India UK bilateral trade",
+    "import export UK",
+    "British trade suppliers",
     "aluminium products and extrusions",
     "metal products",
     "plastics HDPE",
-    "AAC blocks",
-    "spices",
+    "polymer raw materials UK",
+    "AAC blocks UK export",
+    "Indian spices wholesale UK",
     "global sourcing",
-    "wholesale products",
+    "wholesale products UK",
+    "international freight and trade logistics",
   ],
   openGraph: {
     title: "Layrock Global Trading LTD | Global Sourcing & Export Solutions",
@@ -63,8 +73,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-screen bg-white font-sans font-normal text-[#171717] antialiased">
-        {children}
+      <body className="flex min-h-screen flex-col bg-white font-sans font-normal text-[#171717] antialiased">
+        <Header />
+        <div className="flex-1">
+          {children}
+        </div>
+        <Footer />
         <WhatsAppIsland />
       </body>
     </html>

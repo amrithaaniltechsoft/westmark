@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useRef } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -30,18 +32,17 @@ function CategoryRow({
 
   return (
     <div className="rounded-2xl bg-[#f4f5f7] p-3 sm:p-4">
-
-
       {/* Grid: Left Category Card (compact height) + Right Products Carousel */}
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-12 lg:items-stretch">
         {/* Left: Compact Category banner with bg image */}
         <div className="relative min-h-[160px] overflow-hidden rounded-xl bg-[#171717] p-4 text-[#171717] lg:col-span-3 lg:min-h-[220px] flex flex-col justify-start items-start shadow-xs">
-          <img
+          <Image
             src={category.image}
             alt={category.name}
-            className="absolute inset-0 size-full object-cover transition-transform duration-500 hover:scale-105"
+            fill
+            sizes="(max-width: 1024px) 100vw, 360px"
+            className="object-cover transition-transform duration-500 hover:scale-105"
           />
-          {/* <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-black/35" /> */}
 
           <div className="relative z-10 flex flex-col items-start text-left">
             <h4 className="text-[16px] font-bold leading-tight tracking-tight sm:text-[18px]">
@@ -50,7 +51,7 @@ function CategoryRow({
             <a
               href="#products"
               onClick={() => onSelectCategory?.(category.name)}
-              className="mt-2.5 inline-flex items-center gap-1.5 border border-[#171717] hover:border-[#ff0000] rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-semibold text-[#171717] shadow-xs transition hover:bg-[#ff0000] hover:text-white"
+              className="mt-2.5 inline-flex items-center gap-1.5 rounded-md bg-white/95 px-2.5 py-1 text-[11px] font-semibold text-[#171717] shadow-xs transition hover:bg-[#ff0000] hover:text-white"
             >
               <span>View all</span>
               <ArrowUpRight size={13} />
@@ -115,23 +116,33 @@ export function CategoryShowcase({
   const showcaseCategories = categories.filter((c) => c.name !== "All products");
 
   return (
-    <section className="px-4 pb-6 pt-2 sm:px-6 lg:px-10 lg:pb-8">
-      <div className="mx-auto max-w-[1440px] space-y-6">
-        {showcaseCategories.map((category, index) => {
-          const categoryProducts = products.filter(
-            (p) => p.category === category.name
-          );
+    <section className="px-4 pb-6 pt-6 sm:px-6 lg:px-10 lg:pb-8">
+      <div className="mx-auto max-w-[1440px]">
+        {/* Simple Section Header */}
+        <ScrollReveal variant="fade-up" className="mb-6">
+          <h2 className="text-[26px] font-semibold leading-[1.2] tracking-[-0.03em] text-[#171717] sm:text-[32px]">
+            Product Highlights by Category
+          </h2>
+        </ScrollReveal>
 
-          return (
-            <ScrollReveal key={category.name} variant="fade-up" delayMs={index * 50}>
-              <CategoryRow
-                category={category}
-                categoryProducts={categoryProducts}
-                onSelectCategory={onSelectCategory}
-              />
-            </ScrollReveal>
-          );
-        })}
+        {/* Category Rows */}
+        <div className="space-y-6">
+          {showcaseCategories.map((category, index) => {
+            const categoryProducts = products.filter(
+              (p) => p.category === category.name
+            );
+
+            return (
+              <ScrollReveal key={category.name} variant="fade-up" delayMs={index * 50}>
+                <CategoryRow
+                  category={category}
+                  categoryProducts={categoryProducts}
+                  onSelectCategory={onSelectCategory}
+                />
+              </ScrollReveal>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

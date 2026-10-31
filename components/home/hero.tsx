@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Autoplay, A11y } from "swiper/modules";
@@ -34,11 +36,13 @@ export function Hero({ slides }: HeroProps) {
           {slides.map((slide, index) => (
             <SwiperSlide key={`${slide.title}-${index}`} className="overflow-hidden rounded-2xl">
               <div className="relative h-full min-h-[280px] overflow-hidden rounded-2xl bg-[#333333]">
-                <img
+                <Image
                   src={slide.image}
                   alt={slide.label}
-                  fetchPriority={index === 0 ? "high" : "auto"}
-                  className="absolute inset-0 size-full object-cover"
+                  fill
+                  priority={index === 0}
+                  sizes="(max-width: 1440px) 100vw, 1440px"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#171717]/90 via-[#171717]/45 to-transparent" />
                 {/* <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10" /> */}

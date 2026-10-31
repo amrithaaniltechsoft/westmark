@@ -25,7 +25,7 @@ export function TestimonialsSection({
           {/* Left Edge: Section Header & Descriptions */}
           <div className="lg:col-span-4 lg:pr-6">
             <Eyebrow>PARTNERSHIP MATTERS</Eyebrow>
-            <h2 className="mt-3 text-[34px] font-bold leading-[1.12] tracking-[-0.04em] text-[#171717] sm:text-[44px]">
+            <h2 className="mt-3 text-[26px] font-semibold leading-[1.2] tracking-[-0.03em] text-[#171717] sm:text-[32px]">
               Built on clear communication.
             </h2>
             <p className="mt-4 text-[15px] leading-7 text-[#3f3f3f]">

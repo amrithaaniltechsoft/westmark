@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -16,11 +17,12 @@ export function ContactSection({ categories }: ContactSectionProps) {
         {/* Full-width boxed banner with image & dark overlay */}
         <div className="relative min-h-[380px] overflow-hidden rounded-3xl bg-[#171717] px-6 py-12 text-white sm:px-12 sm:py-16 lg:px-20 lg:py-20 flex flex-col justify-between">
           {/* Background image */}
-          <img
+          <Image
             src="/banner/b2.png"
             alt="International shipping, ports and global logistics"
-            loading="lazy"
-            className="absolute inset-0 size-full object-cover transition-transform duration-700 hover:scale-105"
+            fill
+            sizes="(max-width: 1440px) 100vw, 1440px"
+            className="object-cover transition-transform duration-700 hover:scale-105"
           />
 
           {/* Dark gradient overlay for readability */}

@@ -17,7 +17,7 @@ export function CategoriesSection({
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-9 flex flex-wrap items-end justify-between gap-4">
           <ScrollReveal variant="fade-up">
-            <h2 className="mt-3 text-[32px] tracking-[-0.04em] sm:text-[42px]">
+            <h2 className="mt-3 text-[26px] font-semibold leading-[1.2] tracking-[-0.03em] text-[#171717] sm:text-[32px]">
               Explore product categories
             </h2>
           </ScrollReveal>

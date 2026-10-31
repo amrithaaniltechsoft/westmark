@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import Link from "next/link";
 import { ArrowRight, Search, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,7 +33,7 @@ export function ProductListing({
       <div className="mx-auto max-w-[1440px]">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <ScrollReveal variant="fade-up">
-            <h2 className="mt-3 text-[32px] tracking-[-0.04em] sm:text-[42px]">
+            <h2 className="mt-3 text-[26px] font-semibold leading-[1.2] tracking-[-0.03em] text-[#171717] sm:text-[32px]">
               Featured Products & Services
             </h2>
           </ScrollReveal>
@@ -98,11 +100,12 @@ export function ProductListing({
           <div className="flex flex-col items-start justify-between gap-5 overflow-hidden rounded-2xl bg-[#f4f5f7] sm:flex-row sm:items-center pr-6 sm:pr-8">
           <div className="flex h-full items-center gap-5">
             <div className="relative h-28 w-28 shrink-0 overflow-hidden sm:h-32 sm:w-32">
-              <img
+              <Image
                 src="/product-cta/3D Clipboard Inspection Icon.png"
                 alt="Product enquiry"
-                loading="lazy"
-                className="size-full object-cover"
+                fill
+                sizes="(max-width: 640px) 112px, 128px"
+                className="object-cover"
               />
             </div>
             <div className="py-4">

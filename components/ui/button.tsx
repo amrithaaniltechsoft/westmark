@@ -42,7 +42,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   secondary:
     "bg-[#333333] text-white hover:bg-[#ff0000] active:bg-[#222222] focus-visible:outline-[#333333]",
   tertiary:
-    "border border-white/50 bg-white/[0.06] text-white backdrop-blur-sm hover:bg-white hover:text-[#333333] focus-visible:outline-white",
+    "border border-white/25 bg-white/10 text-white backdrop-blur-md shadow-xs hover:bg-white hover:text-[#171717] focus-visible:outline-white",
   outline:
     "border border-black/15 bg-white text-[#333333] hover:border-[#ff0000] hover:text-[#ff0000] focus-visible:outline-[#ff0000]",
   ghost:
@@ -77,7 +77,7 @@ export const Button = React.forwardRef<
   } = props;
 
   const baseStyles =
-    "inline-flex items-center justify-center font-medium select-none cursor-pointer border-0 rounded-lg transition-all duration-200 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50";
+    "inline-flex items-center justify-center font-medium select-none cursor-pointer rounded-lg transition-all duration-200 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
   const resolvedClasses = [
     baseStyles,
