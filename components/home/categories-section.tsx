@@ -5,7 +5,7 @@ import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export interface CategoriesSectionProps {
   categories: Category[];
-  onSelectCategory: (category: string) => void;
+  onSelectCategory?: (category: string) => void;
 }
 
 export function CategoriesSection({
@@ -23,7 +23,7 @@ export function CategoriesSection({
           </ScrollReveal>
           <ScrollReveal variant="fade-left">
             <a
-              href="#products"
+              href="/products"
               className="group inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-[13px] font-medium text-[#171717] transition hover:text-[#ff0000] sm:px-4 sm:py-2 sm:text-[14px]"
             >
               <span>View all products</span>
@@ -35,19 +35,23 @@ export function CategoriesSection({
         {/* Mobile: Horizontal scrollable row with touch-pan-x and overflow-y-hidden
             Desktop (sm+): Regular multi-column grid (3 on tablet, 5 on desktop) */}
         <div className="-mx-3.5 flex items-start gap-4 overflow-x-auto overflow-y-hidden px-3.5 pb-2 pt-1 touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 lg:grid-cols-5 lg:gap-6">
-          {categories.slice(1).map((category, index) => (
-            <ScrollReveal
-              key={category.name}
-              variant="fade-up"
-              delayMs={index * 60}
-              className="w-[124px] shrink-0 sm:w-auto sm:shrink"
-            >
-              <CategoryCard
-                category={category}
-                onSelectCategory={onSelectCategory}
-              />
-            </ScrollReveal>
-          ))}
+          {categories.slice(1).map((category, index) => {
+            const categoryHref = `/products?category=${encodeURIComponent(category.name)}`;
+            return (
+              <ScrollReveal
+                key={category.name}
+                variant="fade-up"
+                delayMs={index * 60}
+                className="w-[124px] shrink-0 sm:w-auto sm:shrink"
+              >
+                <CategoryCard
+                  category={category}
+                  href={categoryHref}
+                  onSelectCategory={onSelectCategory}
+                />
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

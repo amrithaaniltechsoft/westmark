@@ -36,13 +36,13 @@ export function ProductsCategoryNav({
 
           {/* Mobile: Horizontal scrollable row with touch-pan-x and overflow-y-hidden
               Desktop (sm+): Regular multi-column grid (3 on tablet, 5 on desktop) */}
-          <div className="-mx-3.5 flex items-start gap-3 overflow-x-auto overflow-y-hidden px-3.5 pb-2 pt-1 touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 lg:grid-cols-5">
+          <div className="-mx-3.5 flex items-start gap-3.5 overflow-x-auto overflow-y-hidden px-3.5 pb-3 pt-1 touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 lg:grid-cols-5">
             {categories.map((category) => {
               const isSelected = selectedCategory === category.name;
               return (
                 <div
                   key={category.name}
-                  className={`flex w-[124px] shrink-0 items-center justify-center rounded-2xl py-3 px-2 transition-all duration-300 sm:w-auto sm:shrink ${
+                  className={`flex w-[142px] shrink-0 items-center justify-center rounded-2xl p-2.5 transition-all duration-300 min-[400px]:w-[150px] sm:w-auto sm:shrink sm:py-3 sm:px-2 ${
                     isSelected
                       ? "bg-[#ff0000]/5 ring-2 ring-[#ff0000]"
                       : "hover:bg-black/[0.02]"

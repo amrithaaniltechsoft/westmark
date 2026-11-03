@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Search, SlidersHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/ui/product-card";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
 import type { Category, Product } from "@/components/data/site-data";
+import { ProductCard } from "@/components/ui/product-card";
+import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export interface ProductListingProps {
   categories: Category[];
@@ -30,23 +30,20 @@ export function ProductListing({
   return (
     <section id="products" className="scroll-mt-36 bg-white px-3.5 pb-12 pt-6 sm:px-6 sm:pb-16 sm:pt-8 lg:px-10 lg:pb-24 lg:pt-10">
       <div className="mx-auto max-w-[1440px]">
-        <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col gap-3 sm:gap-6 sm:flex-row sm:items-end sm:justify-between">
           <ScrollReveal variant="fade-up">
             <h2 className="text-[20px] font-semibold leading-[1.2] tracking-[-0.03em] text-[#171717] sm:text-[26px] md:text-[32px]">
               Featured Products & Services
             </h2>
           </ScrollReveal>
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="flex h-9 w-full sm:w-auto items-center justify-between gap-1.5 rounded-lg border border-black/15 bg-[#faf9f7] px-2.5">
-              <div className="flex items-center gap-1.5">
-                <SlidersHorizontal size={14} className="shrink-0 text-[#404040]" />
-                <span className="text-[12px] text-[#737373] sm:hidden">Filter:</span>
-              </div>
+          <div className="flex items-center">
+            <label className="inline-flex h-9 w-auto items-center gap-2 rounded-lg border border-black/15 bg-[#faf9f7] px-3 shadow-xs">
+              <SlidersHorizontal size={14} className="shrink-0 text-[#404040]" />
               <select
                 value={activeCategory}
                 onChange={(event) => onSelectCategory(event.target.value)}
                 aria-label="Filter products by category"
-                className="bg-transparent text-[12.5px] sm:text-[13px] font-medium text-[#171717] outline-none cursor-pointer"
+                className="bg-transparent text-[12.5px] font-medium text-[#171717] outline-none cursor-pointer sm:text-[13px]"
               >
                 {categories.map((category) => (
                   <option key={category.name} value={category.name}>
@@ -98,35 +95,48 @@ export function ProductListing({
           </div>
         )}
 
-        {/* CTA Card */}
-        <ScrollReveal variant="fade-up" delayMs={100} className="mt-8 sm:mt-10">
-          <div className="flex flex-col items-start justify-between gap-4 overflow-hidden rounded-2xl bg-[#f4f5f7] p-4 sm:flex-row sm:items-center sm:p-0 sm:pr-8">
-            <div className="flex items-center gap-3.5 sm:gap-5">
-              <div className="relative size-16 shrink-0 overflow-hidden rounded-xl sm:h-32 sm:w-32 sm:rounded-none">
-                <Image
-                  src="/product-cta/3D Clipboard Inspection Icon.png"
-                  alt="Product enquiry"
-                  fill
-                  sizes="(max-width: 640px) 64px, 128px"
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h3 className="text-[15px] sm:text-xl font-bold text-[#171717]">Looking for something specific?</h3>
-                <p className="mt-0.5 text-[12.5px] sm:text-[14px] leading-relaxed text-[#3f3f3f]">
-                  Share your requirements, quantity and destination with our team.
+        {/* ── Inspection Certificate CTA Card (Placed as full-width banner) ── */}
+        <div className="mt-12 sm:mt-16 lg:mt-20">
+          <div className="relative overflow-hidden rounded-2xl border border-black/[0.08] bg-gradient-to-br from-[#faf9f7] via-[#f5f4f0] to-[#eae8e3] p-5 sm:p-8 lg:p-10 shadow-xs">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              {/* Left Content */}
+              <div className="max-w-xl">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#ff0000]">
+                  Trade Assurance
+                </span>
+                <h3 className="mt-1 text-[20px] font-bold leading-tight tracking-tight text-[#171717] sm:text-[24px]">
+                  Third-Party Certified Shipments
+                </h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-[#555] sm:text-[14px]">
+                  All consignments can be inspected by globally recognized bodies including SGS, Bureau Veritas, or Intertek with formal certificates of analysis before port departure.
                 </p>
               </div>
+
+              {/* Right CTA Button & Visual Icon */}
+              <div className="flex items-center gap-4">
+                <div className="relative hidden size-16 shrink-0 sm:block">
+                  <Image
+                    src="/product-cta/3D Clipboard Inspection Icon.png"
+                    alt="Inspection Certificate"
+                    fill
+                    sizes="64px"
+                    className="object-contain"
+                  />
+                </div>
+                <Button
+                  as="a"
+                  href="/contact"
+                  variant="primary"
+                  size="md"
+                  rightIcon={<ArrowRight size={15} />}
+                  className="rounded-xl shadow-xs"
+                >
+                  Request Inspection Specs
+                </Button>
+              </div>
             </div>
-            <a
-              href="#contact"
-              className="inline-flex h-10 sm:min-h-12 w-full sm:w-auto shrink-0 items-center justify-center gap-2 rounded-lg bg-[#333333] px-4 sm:px-6 text-[13px] sm:text-[14px] font-medium text-white transition hover:bg-[#ff0000]"
-            >
-              <span>Submit your requirements</span>
-              <ArrowRight size={15} />
-            </a>
           </div>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );
