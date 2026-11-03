@@ -41,15 +41,16 @@ export function ProductFloatingCta({
   return (
     <aside
       aria-label="Floating product enquiry bar"
-      className={`fixed bottom-5 left-1/2 z-40 w-[calc(100%-2rem)] max-w-[620px] -translate-x-1/2 transition-all duration-300 ease-out sm:bottom-6 ${isVisible
-        ? "pointer-events-auto translate-y-0 opacity-100"
-        : "pointer-events-none translate-y-8 opacity-0"
-        }`}
+      className={`fixed bottom-3 left-1/2 z-40 w-[calc(100%-1.5rem)] max-w-[620px] -translate-x-1/2 transition-all duration-300 ease-out sm:bottom-6 sm:w-[calc(100%-2rem)] ${
+        isVisible
+          ? "pointer-events-auto translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-8 opacity-0"
+      }`}
     >
-      <div className="flex items-center justify-between gap-3 rounded-2xl border border-black/10 bg-white/95 p-2.5 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-3 sm:gap-4">
+      <div className="flex items-center justify-between gap-2.5 rounded-2xl border border-black/10 bg-white/95 p-2 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.22)] backdrop-blur-md sm:gap-4 sm:p-3">
         {/* Product Image & Title */}
-        <div className="flex min-w-0 items-center gap-3">
-          <div className="relative size-12 shrink-0 overflow-hidden rounded-xl border border-black/5 bg-[#f6f6f6] sm:size-14">
+        <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+          <div className="relative size-11 shrink-0 overflow-hidden rounded-xl border border-black/5 bg-[#f6f6f6] sm:size-14">
             <Image
               src={image}
               alt={name}
@@ -60,10 +61,10 @@ export function ProductFloatingCta({
           </div>
 
           <div className="min-w-0">
-            <span className="block truncate text-sm font-medium text-[#171717]/80">
+            <span className="block truncate text-[11px] font-medium text-[#171717]/80 sm:text-sm">
               {category}
             </span>
-            <h3 className="truncate text-[13.5px] font-bold text-[#171717] sm:text-[15px]">
+            <h3 className="truncate text-[12.5px] font-bold text-[#171717] sm:text-[15px]">
               {name}
             </h3>
           </div>
@@ -76,8 +77,8 @@ export function ProductFloatingCta({
             href={enquiryHref}
             variant="primary"
             size="sm"
-            rightIcon={<ArrowRight size={15} />}
-            className="rounded-xl px-4 py-2.5 text-[12.5px] font-bold uppercase tracking-wider shadow-sm sm:px-5 sm:text-[13px]"
+            rightIcon={<ArrowRight size={14} className="sm:size-[15px]" />}
+            className="rounded-xl px-3.5 py-2 text-[12px] font-bold uppercase tracking-wider shadow-sm sm:px-5 sm:py-2.5 sm:text-[13px]"
           >
             <span className="hidden xs:inline">Enquire Now</span>
             <span className="xs:hidden">Enquire</span>
@@ -87,4 +88,3 @@ export function ProductFloatingCta({
     </aside>
   );
 }
-

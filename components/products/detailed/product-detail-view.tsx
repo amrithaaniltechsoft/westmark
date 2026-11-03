@@ -126,7 +126,7 @@ export function ProductDetailView({
               />
 
               {/* FAQ Accordion Component */}
-              <ProductFaqAccordion faqs={faqs} />
+              {/* <ProductFaqAccordion faqs={faqs} /> */}
             </div>
           </div>
         </div>

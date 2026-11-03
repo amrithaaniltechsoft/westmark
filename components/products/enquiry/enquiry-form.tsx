@@ -6,7 +6,6 @@ import type { Country } from "react-phone-number-input";
 import { Button } from "@/components/ui/button";
 import { DestinationCountrySelector, type CountryItem } from "@/components/products/enquiry/destination-country-selector";
 import { PhoneCountryInput } from "@/components/products/enquiry/phone-country-input";
-import { EnquiryCaptcha } from "@/components/products/enquiry/enquiry-captcha";
 
 export interface EnquiryFormData {
   quantity: number;
@@ -46,8 +45,6 @@ const INCOTERMS = [
   "DAP (Delivered at Place)",
 ];
 
-const CAPTCHA_SAMPLES = ["ASB3", "7K9P", "W4R2", "X8Q9", "M3T7", "L6Y9"];
-
 export function EnquiryForm({
   priorityCountries,
   allCountries,
@@ -69,19 +66,6 @@ export function EnquiryForm({
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [specialRequirements, setSpecialRequirements] = useState<string>("");
 
-  // Captcha
-  const [captchaIndex, setCaptchaIndex] = useState<number>(0);
-  const [captchaInput, setCaptchaInput] = useState<string>("");
-  const [captchaError, setCaptchaError] = useState<string>("");
-
-  const currentCaptcha = CAPTCHA_SAMPLES[captchaIndex];
-
-  const handleRefreshCaptcha = () => {
-    setCaptchaIndex((prev) => (prev + 1) % CAPTCHA_SAMPLES.length);
-    setCaptchaInput("");
-    setCaptchaError("");
-  };
-
   const handleDecreaseQuantity = () => {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
@@ -96,8 +80,6 @@ export function EnquiryForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Captcha hidden for now
-    setCaptchaError("");
     onSubmit({
       quantity,
       shippingUnit,
@@ -114,20 +96,20 @@ export function EnquiryForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-6 space-y-6">
+    <form onSubmit={handleSubmit} className="mt-4 space-y-4 sm:mt-6 sm:space-y-5 lg:space-y-6">
       {/* Row 1: Target Quantity & Shipping Unit */}
       <div>
-        <label className="block text-[12.5px] font-bold text-[#171717]">
+        <label className="block text-[11.5px] font-bold text-[#171717] sm:text-[12.5px]">
           Target Quantity & Shipping Unit <span className="text-[#ff0000]">*</span>
         </label>
-        <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="mt-1.5 grid grid-cols-1 gap-2.5 sm:mt-2 sm:grid-cols-2 sm:gap-3">
           {/* Stepper Input */}
-          <div className="flex h-12 items-center rounded-xl border border-black/15 bg-white px-2 shadow-xs focus-within:border-[#ff0000] focus-within:ring-2 focus-within:ring-[#ff0000]/10">
+          <div className="flex h-11 items-center rounded-xl border border-black/15 bg-white px-2 shadow-xs focus-within:border-[#ff0000] focus-within:ring-2 focus-within:ring-[#ff0000]/10 sm:h-12">
             <button
               type="button"
               onClick={handleDecreaseQuantity}
               aria-label="Decrease quantity"
-              className="flex size-8 items-center justify-center rounded-lg text-[#555] transition hover:bg-black/5 hover:text-[#171717]"
+              className="flex size-7 items-center justify-center rounded-lg text-[#555] transition hover:bg-black/5 hover:text-[#171717] cursor-pointer sm:size-8"
             >
               <Minus size={15} />
             </button>
@@ -136,14 +118,14 @@ export function EnquiryForm({
               min="1"
               value={quantity}
               onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-              className="w-full text-center text-[15px] font-bold text-[#171717] outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              className="w-full text-center text-[14px] font-bold text-[#171717] outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none sm:text-[15px]"
               required
             />
             <button
               type="button"
               onClick={handleIncreaseQuantity}
               aria-label="Increase quantity"
-              className="flex size-8 items-center justify-center rounded-lg text-[#555] transition hover:bg-black/5 hover:text-[#171717]"
+              className="flex size-7 items-center justify-center rounded-lg text-[#555] transition hover:bg-black/5 hover:text-[#171717] cursor-pointer sm:size-8"
             >
               <Plus size={15} />
             </button>
@@ -154,7 +136,7 @@ export function EnquiryForm({
             <select
               value={shippingUnit}
               onChange={(e) => setShippingUnit(e.target.value)}
-              className="h-12 w-full cursor-pointer appearance-none rounded-xl border border-black/15 bg-white px-4 pr-10 text-[14px] font-medium text-[#171717] shadow-xs outline-none focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10"
+              className="h-11 w-full cursor-pointer appearance-none rounded-xl border border-black/15 bg-white px-3.5 pr-10 text-[13px] font-medium text-[#171717] shadow-xs outline-none focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10 sm:h-12 sm:px-4 sm:text-[14px]"
             >
               {SHIPPING_UNITS.map((unit) => (
                 <option key={unit} value={unit}>
@@ -170,9 +152,9 @@ export function EnquiryForm({
       </div>
 
       {/* Row 2: Full Name & Work Email */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-5">
         <div>
-          <label className="block text-[12.5px] font-bold text-[#171717]">
+          <label className="block text-[11.5px] font-bold text-[#171717] sm:text-[12.5px]">
             Full Name <span className="text-[#ff0000]">*</span>
           </label>
           <input
@@ -181,12 +163,12 @@ export function EnquiryForm({
             placeholder="e.g. Robert Vance"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="mt-2 h-12 w-full rounded-xl border border-black/15 bg-white px-4 text-[14px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10"
+            className="mt-1.5 h-11 w-full rounded-xl border border-black/15 bg-white px-3.5 text-[13px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10 sm:mt-2 sm:h-12 sm:px-4 sm:text-[14px]"
           />
         </div>
 
         <div>
-          <label className="block text-[12.5px] font-bold text-[#171717]">
+          <label className="block text-[11.5px] font-bold text-[#171717] sm:text-[12.5px]">
             Work Email <span className="text-[#ff0000]">*</span>
           </label>
           <input
@@ -195,13 +177,13 @@ export function EnquiryForm({
             placeholder="name@company.com"
             value={workEmail}
             onChange={(e) => setWorkEmail(e.target.value)}
-            className="mt-2 h-12 w-full rounded-xl border border-black/15 bg-white px-4 text-[14px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10"
+            className="mt-1.5 h-11 w-full rounded-xl border border-black/15 bg-white px-3.5 text-[13px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10 sm:mt-2 sm:h-12 sm:px-4 sm:text-[14px]"
           />
         </div>
       </div>
 
       {/* Row 3: Phone / WhatsApp & Company Name */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-5">
         <PhoneCountryInput
           selectedCountry={phoneCountry}
           callingCode={phoneCallingCode}
@@ -213,7 +195,7 @@ export function EnquiryForm({
         />
 
         <div>
-          <label className="block text-[12.5px] font-bold text-[#171717]">
+          <label className="block text-[11.5px] font-bold text-[#171717] sm:text-[12.5px]">
             Company Name
           </label>
           <input
@@ -221,13 +203,13 @@ export function EnquiryForm({
             placeholder="Company / Import Business"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
-            className="mt-2 h-12 w-full rounded-xl border border-black/15 bg-white px-4 text-[14px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10"
+            className="mt-1.5 h-11 w-full rounded-xl border border-black/15 bg-white px-3.5 text-[13px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10 sm:mt-2 sm:h-12 sm:px-4 sm:text-[14px]"
           />
         </div>
       </div>
 
       {/* Row 4: Destination Country & Incoterm / Delivery Terms */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-5">
         <DestinationCountrySelector
           destinationCountry={destinationCountry}
           priorityCountries={priorityCountries}
@@ -236,14 +218,14 @@ export function EnquiryForm({
         />
 
         <div>
-          <label className="block text-[12.5px] font-bold text-[#171717]">
+          <label className="block text-[11.5px] font-bold text-[#171717] sm:text-[12.5px]">
             Incoterm & Delivery Terms
           </label>
-          <div className="relative mt-2">
+          <div className="relative mt-1.5 sm:mt-2">
             <select
               value={incoterm}
               onChange={(e) => setIncoterm(e.target.value)}
-              className="h-12 w-full cursor-pointer appearance-none rounded-xl border border-black/15 bg-white px-4 pr-10 text-[14px] font-medium text-[#171717] shadow-xs outline-none focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10"
+              className="h-11 w-full cursor-pointer appearance-none rounded-xl border border-black/15 bg-white px-3.5 pr-10 text-[13px] font-medium text-[#171717] shadow-xs outline-none focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10 sm:h-12 sm:px-4 sm:text-[14px]"
             >
               {INCOTERMS.map((term) => (
                 <option key={term} value={term}>
@@ -260,7 +242,7 @@ export function EnquiryForm({
 
       {/* Row 5: Full Delivery Address / Import Facility Location */}
       <div>
-        <label className="block text-[12.5px] font-bold text-[#171717]">
+        <label className="block text-[11.5px] font-bold text-[#171717] sm:text-[12.5px]">
           Full Delivery Address / Import Facility Location
         </label>
         <textarea
@@ -268,13 +250,13 @@ export function EnquiryForm({
           placeholder="Street address, city, state/province, postal code, warehouse port details..."
           value={deliveryAddress}
           onChange={(e) => setDeliveryAddress(e.target.value)}
-          className="mt-2 w-full rounded-xl border border-black/15 bg-white p-3.5 text-[14px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10"
+          className="mt-1.5 w-full rounded-xl border border-black/15 bg-white p-3 text-[13px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10 sm:mt-2 sm:p-3.5 sm:text-[14px]"
         />
       </div>
 
       {/* Row 6: Special Requirements / Packing Notes */}
       <div>
-        <label className="block text-[12.5px] font-bold text-[#171717]">
+        <label className="block text-[11.5px] font-bold text-[#171717] sm:text-[12.5px]">
           Special Requirements / Packing Notes
         </label>
         <textarea
@@ -282,14 +264,12 @@ export function EnquiryForm({
           placeholder="Specify grain moisture %, custom branding/packaging, target delivery date..."
           value={specialRequirements}
           onChange={(e) => setSpecialRequirements(e.target.value)}
-          className="mt-2 w-full rounded-xl border border-black/15 bg-white p-3.5 text-[14px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10"
+          className="mt-1.5 w-full rounded-xl border border-black/15 bg-white p-3 text-[13px] text-[#171717] placeholder-[#a3a3a3] shadow-xs outline-none transition focus:border-[#ff0000] focus:ring-2 focus:ring-[#ff0000]/10 sm:mt-2 sm:p-3.5 sm:text-[14px]"
         />
       </div>
 
-      {/* Security Verification (Captcha hidden for now) */}
-
       {/* Submit Button */}
-      <div className="pt-2">
+      <div className="pt-1 sm:pt-2">
         <Button
           as="button"
           type="submit"
@@ -298,7 +278,7 @@ export function EnquiryForm({
           fullWidth
           isLoading={isSubmitting}
           rightIcon={<Send size={16} />}
-          className="rounded-xl uppercase tracking-wider shadow-md"
+          className="rounded-xl uppercase tracking-wider shadow-md text-[13px] sm:text-[14px]"
         >
           Submit Export Enquiry
         </Button>
@@ -306,4 +286,3 @@ export function EnquiryForm({
     </form>
   );
 }
-

@@ -2,14 +2,21 @@
 
 import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
 import { PHONE_NUMBER } from "@/components/data/site-data";
 
 export function WhatsAppIsland() {
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
+
+  // Check if current route is a product detail page (e.g. /products/aluminium-profiles-extruded-sections)
+  // but NOT the enquiry page or products catalog root
+  const isProductDetailPage =
+    pathname?.startsWith("/products/") && !pathname?.endsWith("/enquiry");
 
   useEffect(() => {
     function handleScroll() {
-      // 1. Hide in hero section
+      // 1. Hide in hero section on home page
       const heroElement = document.getElementById("home");
       const heroBottom = heroElement
         ? heroElement.offsetTop + heroElement.offsetHeight
@@ -17,7 +24,7 @@ export function WhatsAppIsland() {
 
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY < heroBottom - 80) {
+      if (pathname === "/" && currentScrollY < heroBottom - 80) {
         setIsVisible(false);
         return;
       }
@@ -43,7 +50,7 @@ export function WhatsAppIsland() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
-  }, []);
+  }, [pathname]);
 
   const cleanPhone = PHONE_NUMBER.replace(/\D/g, "");
   const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(
@@ -52,7 +59,11 @@ export function WhatsAppIsland() {
 
   return (
     <div
-      className={`fixed bottom-7 right-6 z-50 transition-all duration-300 ease-out sm:bottom-8 sm:right-8 ${
+      className={`fixed right-4 z-50 transition-all duration-300 ease-out sm:right-8 sm:bottom-8 ${
+        isProductDetailPage
+          ? "bottom-24 sm:bottom-8"
+          : "bottom-6 sm:bottom-8"
+      } ${
         isVisible
           ? "translate-y-0 opacity-100 pointer-events-auto"
           : "translate-y-8 opacity-0 pointer-events-none"
@@ -63,10 +74,10 @@ export function WhatsAppIsland() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Layrock Global Trading on WhatsApp"
-        className="group flex size-14 items-center justify-center rounded-full border border-black/15 bg-[#128C7E] text-white shadow-[0_12px_36px_rgba(0,0,0,0.32)] transition-all duration-200 hover:bg-[#075E54] hover:shadow-[0_16px_40px_rgba(0,0,0,0.4)] hover:scale-110 active:scale-95"
+        className="group flex size-12 items-center justify-center rounded-full border border-black/15 bg-[#128C7E] text-white shadow-[0_12px_36px_rgba(0,0,0,0.32)] transition-all duration-200 hover:bg-[#075E54] hover:shadow-[0_16px_40px_rgba(0,0,0,0.4)] hover:scale-110 active:scale-95 sm:size-14"
       >
         {/* Official WhatsApp Icon */}
-        <FaWhatsapp className="size-7 text-white drop-shadow-sm transition-transform duration-200 group-hover:scale-105" />
+        <FaWhatsapp className="size-6 sm:size-7 text-white drop-shadow-sm transition-transform duration-200 group-hover:scale-105" />
       </a>
     </div>
   );
