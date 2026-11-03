@@ -56,7 +56,7 @@ export function ContactSection({ }: ContactSectionProps) {
 
             <div className="mt-5 flex flex-wrap items-center gap-2.5 sm:mt-8 sm:gap-4">
               <Link
-                href="/contact"
+                href="#contact"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#ff0000] px-5 py-2.5 sm:px-7 sm:py-3.5 text-[13px] sm:text-[14px] font-bold text-white shadow-md transition hover:bg-[#d60000] active:scale-95"
               >
                 <span>Contact our team</span>

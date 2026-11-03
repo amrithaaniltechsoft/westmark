@@ -11,8 +11,8 @@ export interface ProductCardProps {
 
 export function ProductCard({ product, className = "" }: ProductCardProps) {
   const productSlug = slugify(product.name);
-  const productHref = `/products/${productSlug}`;
-  const enquiryHref = `/products/${productSlug}/enquiry`;
+  const productHref = "#";
+  const enquiryHref = "#contact";
 
   return (
     <article

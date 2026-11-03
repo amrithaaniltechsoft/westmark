@@ -47,7 +47,7 @@ export function AboutSection() {
 
               <div className="mt-4 sm:mt-5 flex flex-wrap items-center gap-2 sm:gap-2.5">
                 <Link
-                  href="/about"
+                  href="#"
                   className="inline-flex items-center gap-1.5 sm:gap-2 rounded-xl bg-[#ff0000] px-3.5 sm:px-4 py-2 sm:py-2.5 text-[12px] sm:text-[13px] font-semibold text-white shadow-sm transition hover:bg-[#d60000]"
                 >
                   <span>Learn more about us</span>

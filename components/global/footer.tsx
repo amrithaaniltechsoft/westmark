@@ -20,7 +20,7 @@ export function Footer({ categories = CATEGORIES, onSelectCategory }: FooterProp
     if (onSelectCategory) {
       onSelectCategory(catName);
     } else {
-      router.push(`/products?category=${encodeURIComponent(catName)}`);
+      const el = document.getElementById("products"); if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   }
 
@@ -55,14 +55,14 @@ export function Footer({ categories = CATEGORIES, onSelectCategory }: FooterProp
             {/* Primary & Secondary Action Buttons */}
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <Link
-                href="/about"
+                href="#"
                 className="inline-flex items-center gap-1.5 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 text-[13px] font-semibold text-white/90 transition hover:bg-white/10 hover:text-white"
               >
                 <span>Know about us</span>
                 <ArrowUpRight size={14} />
               </Link>
               <Link
-                href="/contact"
+                href="#contact"
                 className="inline-flex items-center gap-2 rounded-xl bg-[#ff0000] px-4 py-2.5 text-[13px] font-semibold text-white shadow-sm transition hover:bg-[#d90000] active:scale-95"
               >
                 <span>Contact us</span>
@@ -77,10 +77,10 @@ export function Footer({ categories = CATEGORIES, onSelectCategory }: FooterProp
               Explore
             </h3>
             <div className="mt-3.5 flex flex-col items-start gap-2.5 text-[13.5px] font-medium text-white/70 sm:mt-4 sm:gap-3 sm:text-[14px]">
-              <Link href="/about" className="transition hover:text-[#ff0000]">About us</Link>
+              <Link href="#" className="transition hover:text-[#ff0000]">About us</Link>
               <Link href="/#categories" className="transition hover:text-[#ff0000]">Categories</Link>
-              <Link href="/products" className="transition hover:text-[#ff0000]">Products & Services</Link>
-              <Link href="/contact" className="transition hover:text-[#ff0000]">Contact</Link>
+              <Link href="#products" className="transition hover:text-[#ff0000]">Products & Services</Link>
+              <Link href="#contact" className="transition hover:text-[#ff0000]">Contact</Link>
             </div>
           </ScrollReveal>
 

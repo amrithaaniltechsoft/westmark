@@ -167,11 +167,7 @@ export function Header({
     if (onSearchSubmit && event) {
       onSearchSubmit(event);
     } else {
-      if (query.trim()) {
-        router.push(`/products?search=${encodeURIComponent(query.trim())}`);
-      } else {
-        router.push("/products");
-      }
+      const el = document.getElementById("products"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 
@@ -179,7 +175,9 @@ export function Header({
     if (onSelectCategory) {
       onSelectCategory(catName);
     } else {
-      router.push(`/products?category=${encodeURIComponent(catName)}`);
+      // router.push(`/products?category=${encodeURIComponent(catName)}`); - hidden
+      const el = document.getElementById("products") || document.getElementById("categories");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 
@@ -298,13 +296,13 @@ export function Header({
               className="hidden items-center gap-5 xl:gap-7 lg:flex"
             >
               {[
-                ["About us", "/about"],
-                ["Products & Services", "/products"],
-                ["Testimonials", "/testimonials"],
-                ["Contact", "/contact"],
+                ["About us", "#"],
+                ["Products & Services", "#products"],
+                ["Testimonials", "#"],
+                ["Contact", "#contact"],
               ].map(([label, href]) => (
                 <Link
-                  key={href}
+                  key={label}
                   href={href}
                   className="text-[13.5px] xl:text-[14px] font-medium text-[#171717] transition hover:text-[#ff0000] whitespace-nowrap"
                 >
@@ -316,7 +314,7 @@ export function Header({
             {/* Right Action Buttons */}
             <div className="flex items-center gap-2 sm:gap-2.5">
               <Link
-                href="/contact"
+                href="#contact"
                 className="inline-flex h-9 sm:h-11 items-center gap-1.5 sm:gap-2 rounded-lg bg-[#ff0000] px-3 sm:px-4 text-[12px] sm:text-[13px] font-semibold text-white shadow-xs transition hover:bg-[#d90000] whitespace-nowrap"
               >
                 <span>Request quote</span>
@@ -417,12 +415,13 @@ export function Header({
               ))}
             </nav>
 
-            <Link
-              href="/products"
+            {/* View all link - hidden */}
+            {/* <Link
+              href="#products"
               className="shrink-0 text-[11px] sm:text-[11.5px] font-semibold text-[#ff0000] underline decoration-[#ff0000]/40 underline-offset-4 transition hover:text-[#d90000] hover:decoration-[#d90000]"
             >
               View all
-            </Link>
+            </Link> */}
           </div>
         </div>
       </header>
@@ -475,13 +474,13 @@ export function Header({
                 Menu
               </span>
               {[
-                ["About us", "/about"],
-                ["Products & Services", "/products"],
-                ["Testimonials", "/testimonials"],
-                ["Contact", "/contact"],
+                ["About us", "#"],
+                ["Products & Services", "#products"],
+                ["Testimonials", "#"],
+                ["Contact", "#contact"],
               ].map(([label, href]) => (
                 <Link
-                  key={href}
+                  key={label}
                   href={href}
                   onClick={closeMenu}
                   className="flex items-center rounded-lg px-3.5 py-2.5 text-[14.5px] font-medium text-[#171717] transition hover:bg-black/5 hover:text-[#ff0000]"
@@ -534,7 +533,7 @@ export function Header({
           {/* Drawer Bottom Action */}
           <div className="shrink-0 border-t border-black/[0.08] p-4 sm:p-5">
             <Link
-              href="/contact"
+              href="#contact"
               onClick={closeMenu}
               className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#ff0000] px-4 text-[13px] font-semibold text-white shadow-xs transition hover:bg-[#d90000]"
             >

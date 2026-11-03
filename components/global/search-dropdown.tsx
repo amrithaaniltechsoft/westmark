@@ -34,7 +34,7 @@ export function SearchDropdown({
               return (
                 <Link
                   key={product.id}
-                  href={`/products/${productSlug}`}
+                  href="#products"
                   onClick={onSelectProduct}
                   className="group flex items-center gap-2.5 px-4 py-2 transition hover:bg-black/[0.03]"
                 >

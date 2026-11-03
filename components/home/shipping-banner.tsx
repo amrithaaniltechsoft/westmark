@@ -47,7 +47,7 @@ export function ShippingBanner() {
             <div className="mt-5 sm:mt-7 flex flex-wrap items-center gap-2.5 sm:gap-3">
               <Button
                 as="a"
-                href="/contact"
+                href="#contact"
                 variant="primary"
                 size="md"
                 rightIcon={<ArrowRight size={15} />}
@@ -58,7 +58,7 @@ export function ShippingBanner() {
 
               <Button
                 as="a"
-                href="/about"
+                href="#"
                 variant="tertiary"
                 size="md"
                 className="text-[13px] sm:text-[14px] px-4 py-2 sm:px-5 sm:py-2.5"

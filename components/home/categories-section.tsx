@@ -23,7 +23,7 @@ export function CategoriesSection({
           </ScrollReveal>
           <ScrollReveal variant="fade-left">
             <a
-              href="/products"
+              href="#products"
               className="group inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 text-[13px] font-medium text-[#171717] transition hover:text-[#ff0000] sm:px-4 sm:py-2 sm:text-[14px]"
             >
               <span>View all products</span>
@@ -46,7 +46,7 @@ export function CategoriesSection({
               >
                 <CategoryCard
                   category={category}
-                  href={categoryHref}
+                  href="#products"
                   onSelectCategory={onSelectCategory}
                 />
               </ScrollReveal>

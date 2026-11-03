@@ -69,7 +69,7 @@ export function ProductListing({
 
             <div className="mt-7 flex justify-center sm:mt-9">
               <Link
-                href="/products"
+                href="#products"
                 className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-black/15 bg-white px-5 py-2.5 text-[13px] sm:px-7 sm:py-3 sm:text-[14px] font-semibold text-[#171717] shadow-xs transition hover:border-[#ff0000] hover:bg-[#ff0000] hover:text-white"
               >
                 <span>View all products</span>
@@ -125,7 +125,7 @@ export function ProductListing({
                 </div>
                 <Button
                   as="a"
-                  href="/contact"
+                  href="#contact"
                   variant="primary"
                   size="md"
                   rightIcon={<ArrowRight size={15} />}
