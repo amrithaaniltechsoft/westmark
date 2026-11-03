@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Layrock Global Trading LTD",
   },
   description:
-    "Explore aluminium products & extrusions, metal products, plastics (HDPE & others), AAC blocks, and spices. Connect with our team for product information, wholesale enquiries and export sourcing.",
+    "Explore aluminium products & extrusions, Non-ferrous metals, plastics (HDPE & others), AAC blocks, and spices. Connect with our team for product information, wholesale enquiries and export sourcing.",
   applicationName: "Layrock Global Trading LTD",
   keywords: [
     "export company",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     "import export UK",
     "British trade suppliers",
     "aluminium products and extrusions",
-    "metal products",
+    "Non-ferrous metals",
     "plastics HDPE",
     "polymer raw materials UK",
     "AAC blocks UK export",

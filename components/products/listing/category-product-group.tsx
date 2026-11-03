@@ -16,8 +16,8 @@ export interface CategoryProductGroupProps {
 const CATEGORY_HERO_IMAGES: Record<string, string> = {
   "Aluminium Products & Extrusions":
     "/home-hero/Aluminium Products & Extrusions.png",
-  "Metal Products":
-    "/home-hero/Metal Products & Structural Steel.png",
+  "Non-ferrous metals":
+    "/home-hero/Metal products & Structural Steel.png",
   "Plastics (HDPE & Others)":
     "/home-hero/Plastics HDPE & Other Polymers.png",
   "AAC Blocks":
@@ -30,8 +30,8 @@ const CATEGORY_HERO_IMAGES: Record<string, string> = {
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   "Aluminium Products & Extrusions":
     "Explore premium architectural, commercial and industrial aluminium profiles, extrusions, and sheets.",
-  "Metal Products":
-    "Dependable metal and structural steel sourcing for industrial, fabrication and infrastructure requirements.",
+  "Non-ferrous metals":
+    "Dependable non-ferrous metals and industrial sourcing for manufacturing, fabrication and infrastructure requirements.",
   "Plastics (HDPE & Others)":
     "High-density polyethylene and versatile polymer resins for manufacturing, blow moulding and packaging.",
   "AAC Blocks":

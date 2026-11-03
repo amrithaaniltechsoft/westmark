@@ -64,11 +64,11 @@ export const CATEGORIES: Category[] = [
       "/categories/Aluminium Products & Extrusions.png",
   },
   {
-    name: "Metal Products",
-    short: "Metal products",
-    count: "Steel & alloys",
+    name: "Non-ferrous metals",
+    short: "Non-ferrous metals",
+    count: "Alloys & metals",
     image:
-      "/categories/Metal Products.png",
+      "/categories/Metal products.png",
   },
   {
     name: "Plastics (HDPE & Others)",
@@ -107,7 +107,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 2,
     name: "Industrial Metal & Steel Products",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Dependable metal and structural steel sourcing for industrial, fabrication and infrastructure requirements.",
     image:
@@ -167,7 +167,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 8,
     name: "Structural Carbon Steel Beams & Rebar",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Hot-rolled I-beams, H-channels, angle iron and reinforcement steel bars for heavy construction projects.",
     image:
@@ -177,7 +177,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 9,
     name: "Stainless Steel Pipes & Tube Fittings",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Seamless and welded stainless steel tubing (grades 304/316) for industrial fluid handling and engineering.",
     image:
@@ -316,11 +316,11 @@ export const PRODUCTS: Product[] = [
     number: "22",
   },
 
-  // --- Metal Products (7 more) ---
+  // --- Non-ferrous metals (7 more) ---
   {
     id: 23,
     name: "Cold-Rolled Galvanised Steel Coils (GI)",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Hot-dip zinc coated steel sheets and slit coils offering exceptional rust protection for ducting and roofing.",
     image:
@@ -330,7 +330,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 24,
     name: "Alloy Steel Round Bars & Forging Stock",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Speciality alloy steel bars for high-stress gears, shafts and industrial automotive manufacturing.",
     image:
@@ -340,7 +340,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 25,
     name: "Heavy Structural Steel Plate & Flanges",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "High-yield carbon steel plate cut to size for shipbuilding, pressure vessels and bridge infrastructure.",
     image:
@@ -350,7 +350,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 26,
     name: "Industrial Stainless Steel Wire Mesh",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Woven SS304/SS316 fine and heavy wire mesh for precision filtration, sieving and security fencing.",
     image:
@@ -360,7 +360,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 27,
     name: "Mild Steel Equal & Unequal Angles",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Standard and structural grade L-profiles for transmission towers, equipment frames and construction trusses.",
     image:
@@ -370,7 +370,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 28,
     name: "Precision Drawn Seamless Hydraulic Tubes",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Cold-finished precision steel tubes tested for high hydraulic pressure and tight dimensional tolerances.",
     image:
@@ -380,7 +380,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 29,
     name: "Reinforcing Deformed Steel TMT Bars",
-    category: "Metal Products",
+    category: "Non-ferrous metals",
     description:
       "Thermo-Mechanically Treated (TMT) Fe500D rebars with superior bendability and seismic resistance.",
     image:
@@ -718,12 +718,12 @@ export const HERO_SLIDES: HeroSlide[] = [
   },
   {
     eyebrow: "OUR PRODUCT CATEGORIES",
-    title: "Metal Products &\nStructural Steel",
+    title: "Non-ferrous metals &\nStructural Steel",
     description:
       "Dependable metal, structural steel, rebar, beams, and stainless steel pipe sourcing for industrial infrastructure.",
     image:
-      "/home-hero/Metal Products & Structural Steel.png",
-    label: "Category: Metal Products",
+      "/home-hero/Metal products & Structural Steel.png",
+    label: "Category: Non-ferrous metals",
   },
   {
     eyebrow: "OUR PRODUCT CATEGORIES",

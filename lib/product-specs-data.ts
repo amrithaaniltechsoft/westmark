@@ -14,7 +14,7 @@ export function getSpecsForCategory(product: Product): CategorySpecs {
         origin: "Audited Mills, India / Global",
         packing: "Custom lengths, Protective film & Wooden crates",
       };
-    case "Metal Products":
+    case "Non-ferrous metals":
       return {
         spec: "Structural Grade (S275 / S355 / SS304 / SS316)",
         origin: "Certified Steel Foundries",
