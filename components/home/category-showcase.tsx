@@ -22,12 +22,22 @@ interface CategoryRowProps {
   onSelectCategory?: (category: string) => void;
 }
 
+// Map category names to widescreen images in public/home-hero for mobile & tablet screens
+const MOBILE_TAB_HERO_IMAGES: Record<string, string> = {
+  "Aluminium Products & Extrusions": "/home-hero/Aluminium Products & Extrusions.png",
+  "Metal Products": "/home-hero/Metal Products & Structural Steel.png",
+  "Plastics (HDPE & Others)": "/home-hero/Plastics HDPE & Other Polymers.png",
+  "AAC Blocks": "/home-hero/Autoclaved Aerated Concrete AAC Blocks.png",
+  "Spices": "/home-hero/Premium Export Spices.png",
+};
+
 function CategoryRow({
   category,
   categoryProducts,
   onSelectCategory,
 }: CategoryRowProps) {
   const swiperRef = useRef<SwiperInstance | null>(null);
+  const mobileTabImage = MOBILE_TAB_HERO_IMAGES[category.name] || category.image;
 
   return (
     <div className="rounded-2xl bg-[#f4f5f7] p-2.5 sm:p-4">
@@ -35,13 +45,27 @@ function CategoryRow({
       <div className="grid grid-cols-1 gap-3 lg:grid-cols-12 lg:items-stretch">
         {/* Left: Compact Category banner with bg image & light white gradient from top-left */}
         <div className="relative min-h-[140px] overflow-hidden rounded-xl bg-[#171717] p-4 text-[#171717] sm:min-h-[160px] lg:col-span-3 lg:min-h-[220px] flex flex-col justify-start items-start shadow-xs">
-          <Image
-            src={category.image}
-            alt={category.name}
-            fill
-            sizes="(max-width: 1024px) 100vw, 360px"
-            className="object-cover transition-transform duration-500 hover:scale-105"
-          />
+          {/* Mobile and tablet view: Widescreen hero image from public/home-hero */}
+          <div className="absolute inset-0 block lg:hidden">
+            <Image
+              src={mobileTabImage}
+              alt={category.name}
+              fill
+              sizes="(max-width: 1024px) 100vw, 360px"
+              className="object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+
+          {/* Desktop view (lg+): Category portrait card image */}
+          <div className="absolute inset-0 hidden lg:block">
+            <Image
+              src={category.image}
+              alt={category.name}
+              fill
+              sizes="360px"
+              className="object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
 
           {/* Light white gradient from top-left corner */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/40 to-transparent pointer-events-none" />

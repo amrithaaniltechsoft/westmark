@@ -1,5 +1,12 @@
 "use client";
 
+declare global {
+  interface Window {
+    __layrockLockScroll?: () => void;
+    __layrockUnlockScroll?: () => void;
+  }
+}
+
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -37,9 +44,13 @@ export function Header({
   // Search and dropdown state
   const [internalQuery, setInternalQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const isDropdownOpenRef = useRef(false);
+  isDropdownOpenRef.current = isDropdownOpen;
+  const isSearchFocusedRef = useRef(false);
   const [internalMobileMenuOpen, setInternalMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
+  const savedScrollYRef = useRef(0);
 
   const desktopSearchRef = useRef<HTMLDivElement>(null);
   const mobileSearchRef = useRef<HTMLDivElement>(null);
@@ -51,6 +62,13 @@ export function Header({
   useEffect(() => {
     function handleScroll() {
       const currentScrollY = window.scrollY;
+
+      // Never auto-hide header while user is actively searching or typing
+      if (isSearchFocusedRef.current || isDropdownOpenRef.current) {
+        setIsVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
 
       if (currentScrollY <= 80) {
         setIsVisible(true);
@@ -80,6 +98,8 @@ export function Header({
     }
 
     function handleWindowScroll() {
+      // Ignore scroll events triggered by virtual keyboard popping up on mobile
+      if (isSearchFocusedRef.current) return;
       setIsDropdownOpen(false);
     }
 
@@ -88,6 +108,38 @@ export function Header({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("scroll", handleWindowScroll);
+    };
+  }, []);
+
+  // Lock body scroll while mobile search input is focused to prevent auto-scroll
+  useEffect(() => {
+    function lockBodyScroll() {
+      if (window.innerWidth >= 768) return;
+      savedScrollYRef.current = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${savedScrollYRef.current}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function unlockBodyScroll() {
+      if (document.body.style.position !== 'fixed') return;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, savedScrollYRef.current);
+    }
+
+    window.__layrockLockScroll = lockBodyScroll;
+    window.__layrockUnlockScroll = unlockBodyScroll;
+
+    return () => {
+      unlockBodyScroll();
+      delete window.__layrockLockScroll;
+      delete window.__layrockUnlockScroll;
     };
   }, []);
 
@@ -196,7 +248,11 @@ export function Header({
                   value={query}
                   onChange={(event) => handleQueryChange(event.target.value)}
                   onFocus={() => {
+                    isSearchFocusedRef.current = true;
                     if (query.trim()) setIsDropdownOpen(true);
+                  }}
+                  onBlur={() => {
+                    isSearchFocusedRef.current = false;
                   }}
                   onClick={() => {
                     if (query.trim()) setIsDropdownOpen(true);
@@ -292,7 +348,13 @@ export function Header({
                 value={query}
                 onChange={(event) => handleQueryChange(event.target.value)}
                 onFocus={() => {
+                  isSearchFocusedRef.current = true;
                   if (query.trim()) setIsDropdownOpen(true);
+                  window.__layrockLockScroll?.();
+                }}
+                onBlur={() => {
+                  isSearchFocusedRef.current = false;
+                  window.__layrockUnlockScroll?.();
                 }}
                 onClick={() => {
                   if (query.trim()) setIsDropdownOpen(true);
