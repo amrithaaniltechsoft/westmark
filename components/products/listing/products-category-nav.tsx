@@ -15,10 +15,10 @@ export function ProductsCategoryNav({
   onSelectCategory,
 }: ProductsCategoryNavProps) {
   return (
-    <section className="border-b border-black/[0.06] bg-white px-4 pb-8 pt-6 sm:px-6 lg:px-10 lg:pt-8">
+    <section className="border-b border-black/[0.06] bg-white px-3.5 pb-6 pt-5 sm:px-6 sm:pb-8 sm:pt-6 lg:px-10 lg:pt-8">
       <div className="mx-auto max-w-[1440px]">
         <div className="pt-2">
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 sm:mb-6">
             <span className="text-[12px] font-bold uppercase tracking-wider text-[#737373]">
               Categories
             </span>
@@ -27,23 +27,26 @@ export function ProductsCategoryNav({
               <button
                 type="button"
                 onClick={() => onSelectCategory("all")}
-                className="rounded-full bg-black/5 px-3 py-1 text-[11.5px] font-bold text-[#171717] transition hover:bg-[#ff0000] hover:text-white"
+                className="rounded-full bg-black/5 px-3 py-1 text-[11.5px] font-bold text-[#171717] transition hover:bg-[#ff0000] hover:text-white cursor-pointer"
               >
                 Show All Categories
               </button>
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-5">
+          {/* Mobile: Horizontal scrollable row with negative margins for edge-to-edge swipe
+              Desktop (sm+): Regular multi-column grid (3 on tablet, 5 on desktop) */}
+          <div className="-mx-3.5 flex gap-3 overflow-x-auto px-3.5 pb-2 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-3 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:pt-0 lg:grid-cols-5">
             {categories.map((category) => {
               const isSelected = selectedCategory === category.name;
               return (
                 <div
                   key={category.name}
-                  className={`flex items-center justify-center rounded-2xl py-3 px-2 transition-all duration-300 ${isSelected
-                    ? "bg-[#ff0000]/5 ring-2 ring-[#ff0000]"
-                    : "hover:bg-black/[0.02]"
-                    }`}
+                  className={`flex w-[124px] shrink-0 items-center justify-center rounded-2xl py-3 px-2 transition-all duration-300 sm:w-auto sm:shrink ${
+                    isSelected
+                      ? "bg-[#ff0000]/5 ring-2 ring-[#ff0000]"
+                      : "hover:bg-black/[0.02]"
+                  }`}
                 >
                   <CategoryCard
                     category={category}
